@@ -1,0 +1,15 @@
+input {
+    border: 2px solid rgb(161, 101, 10);
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid rgb(161, 101, 10);
+}
+
+.btn-primary:hover {
+    background-color: rgb(221, 147, 35);
+    border: none;
+}

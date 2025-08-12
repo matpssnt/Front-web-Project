@@ -1,0 +1,24 @@
+{
+  "name": "front---apphotelaria",
+  "version": "1.0.0",
+  "description": "Projeto front-end do sistema de reservas do hotel para web",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hotel",
+    "gerenciamento",
+    "de",
+    "reservas",
+    "web",
+    "front-end",
+    "javascript",
+    "react"
+  ],
+  "author": "Mateus Possonato",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.3.7"
+  }
+}
