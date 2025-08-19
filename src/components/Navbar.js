@@ -3,11 +3,9 @@ export default function Navbar() {
     navbar.innerHTML = `
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-
         <a class="navbar-brand" href="../public/home.html">
             <img src = "../public/assets/img/LogoHotel.png" style="width: 65px; height: 60px;">
         </a>
-
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,8 +29,13 @@ export default function Navbar() {
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="#/register">Cadastre-se</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#/login">Login</a>
+                </li>
+
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
