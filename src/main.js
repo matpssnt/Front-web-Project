@@ -1,10 +1,10 @@
 import renderLoginPage from "./pages/login.js";
-import renderResgisterPage from "./pages/register.js";
+import renderRegisterPage from "./pages/register.js";
 
 // Configuração de rotas
 const routes = {
     "/login": renderLoginPage,
-    "/register": renderResgisterPage
+    "/register": renderRegisterPage
 
     //Novas páginas virão aqui, conforme forem sendo desenvolvidas.
 };

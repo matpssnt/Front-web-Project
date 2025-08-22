@@ -1,7 +1,7 @@
 import Form from "../components/Form.js";
 import Navbar from "../components/navbar.js";
 
-export default function renderResgisterPage() {
+export default function renderRegisterPage() {
     
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';

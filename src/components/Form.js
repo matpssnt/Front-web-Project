@@ -38,5 +38,5 @@ export default function Form() {
     container.appendChild(titulo);
     container.appendChild(formu);
     
-    return divRoot;
+    return container;
 }
