@@ -1,11 +1,12 @@
 import renderLoginPage from "./pages/login.js";
 import renderRegisterPage from "./pages/register.js";
+import renderHomePage from "./pages/homePage.js";
 
 // Configuração de rotas
 const routes = {
     "/login": renderLoginPage,
-    "/register": renderRegisterPage
-
+    "/register": renderRegisterPage,
+    "/home": renderHomePage
     //Novas páginas virão aqui, conforme forem sendo desenvolvidas.
 };
 
@@ -16,15 +17,15 @@ function getPath() {
     //Obtém o hash (ex. "#/login"), remove o # e tira espaços.
     const url = (location.hash || "").replace(/^#/, "").trim();
     
-    //Retorna a URL se começar com "/", se não irá retornar "/login" como padrão.
-    return url && url.startsWith("/") ? url : "/login";
+    //Retorna a URL se começar com "/", se não irá retornar "/home" como padrão.
+    return url && url.startsWith("/") ? url : "/home";
 }
 
 
 //Decide o que renderizar com base na rota atual.
 function renderRoutes() {
     const url = getPath(); //Lê a rota atual, ex. "/register".
-    const render = routes[url] || routes["/login"]; //Busca esta rota no mapa.
+    const render = routes[url] || routes["/home"]; //Busca esta rota no mapa.
     render(); //Executa a função de render na página atual.
 }
 
