@@ -1,5 +1,5 @@
 import Form from "../components/Form.js";
-import Navbar from "../components/navbar.js";
+import Navbar from "../components/Navbar.js";
 
 export default function renderLoginPage() {
 
@@ -18,7 +18,7 @@ export default function renderLoginPage() {
     
 
     const backLogin = document.createElement('a');
-    backLogin.href = '#/register';
+    backLogin.href = 'register';
     backLogin.textContent = 'Não tem uma conta? Faça seu cadastro';
     backLogin.style.cssText = 'color: #4a90e2; text-decoration: none; margin-top: 1.5rem; display: block; text-align: center; font-weight: 500;';
 
@@ -38,7 +38,7 @@ export default function renderLoginPage() {
 
     backLogin.addEventListener('click', (e) => {
         e.preventDefault();
-        window.location.hash = '#/register';
+        window.location.pathname = 'register';
     });
 
     formu.appendChild(backLogin);

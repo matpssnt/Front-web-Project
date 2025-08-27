@@ -1,5 +1,5 @@
 import Form from "../components/Form.js";
-import Navbar from "../components/navbar.js";
+import Navbar from "../components/Navbar.js";
 
 export default function renderRegisterPage() {
     

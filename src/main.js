@@ -11,11 +11,11 @@ const routes = {
 };
 
 
-//Obtém o caminho atual a partir do hash da URL.
+//Obtém o caminho atual a partir do nome.
 function getPath() {
 
-    //Obtém o hash (ex. "#/login"), remove o # e tira espaços.
-    const url = (location.hash || "").replace(/^#/, "").trim();
+    //Exemplo: obtém o "/login".
+    const url = (location.pathname || "").replace("/Possonato/", "/").trim();
     
     //Retorna a URL se começar com "/", se não irá retornar "/home" como padrão.
     return url && url.startsWith("/") ? url : "/home";
@@ -28,10 +28,6 @@ function renderRoutes() {
     const render = routes[url] || routes["/home"]; //Busca esta rota no mapa.
     render(); //Executa a função de render na página atual.
 }
-
-
-
-window.addEventListener("hashchange", renderRoutes);
 
 //Renderização
 document.addEventListener('DOMContentLoaded', renderRoutes);
