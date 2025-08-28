@@ -1,16 +1,20 @@
 <?php
 
+
 class UserModel {
 
     public static function verifUser($conn, $email, $password) {
-        $sql = "SELECT usuario_id, usuario_nome, usuarrio_senha, cargos_nomes AS cargos FROM usuarios AS u JOIN roles ON cargos_id = u_cargo_id WHERE email = ?";
+        $sql = "SELECT usuarios.id, usuarios.nome, usuarios.email, usuarios.senha, usuarios.cargo_id 
+        FROM usuarios 
+        JOIN roles ON cargo_id = usuarios.cargo_id 
+        WHERE usuarios.email = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($user = $result->fetch_assoc()) {
-            if ($user['senha'] === $password) {
+            if (PasswordController::validateHash($password, $user['senha'])) {
                 unset($user['senha']);
                 return $user;
             }

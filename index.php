@@ -21,7 +21,8 @@ $subRoute = $segments[1] ?? null;
 
 
 if ($route != "api") {
-    require __DIR__ . "/publics/index.html";
+    //require __DIR__ . "/publics/index.html";
+    require "teste.php";
     exit;
 }
 
