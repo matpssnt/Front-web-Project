@@ -7,4 +7,6 @@
     define("DB_PASSWORD", "");
     define("DB_BANCO", "hotel");
 
+    define("SECRET_KEY", "036578");
+
 ?>
