@@ -1,10 +1,12 @@
+import { loginRequest, saveToken } from "../api/authAPI.js";
 import Form from "../components/Form.js";
 import Navbar from "../components/Navbar.js";
+import Footer from "../components/Footer.js";
 
 export default function renderLoginPage() {
 
-    const divRoot = document.getElementById('root');
-    divRoot.innerHTML = '';
+    const formu = Form();
+    const contentForm = formu.querySelector('form');
 
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
@@ -13,9 +15,13 @@ export default function renderLoginPage() {
     nav.appendChild(navbar);
     
 
-    const formu = Form();
-    divRoot.appendChild(formu);
-    
+    const pezin = document.getElementById('footer');
+    pezin.innerHTML = '';
+
+    const footer = Footer();
+    pezin.appendChild(footer);
+
+
 
     const backLogin = document.createElement('a');
     backLogin.href = 'register';
@@ -47,7 +53,7 @@ export default function renderLoginPage() {
      //Inputs e botão presentes no form
     const inputEmail = contentForm.querySelector('input[type="email"]');
     const inputSenha = contentForm.querySelector('input[type="password"]');
-    const btn = contentForm.querySelector('button[type="submit"]');
+    //const btn = contentForm.querySelector('button[type="submit"]');
  
     //Monitora o clique no botão para acionar um evento de submeter os dados do form
     contentForm.addEventListener("submit", async (e) => {
@@ -56,9 +62,10 @@ export default function renderLoginPage() {
         const senha = inputSenha.value.trim();
  
         try {
-            const result = await loginRequest(email, senha);
+            const result = await loginRequest(email, password);
+            saveToken(result.token);
             console.log("Login realizado com sucesso");
-            //window.location.pathname = /home;
+            window.location.pathname = "/Possonato/home";
         }
        
         catch {

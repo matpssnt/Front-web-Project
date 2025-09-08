@@ -1,6 +1,6 @@
 <?php
 
-class ClientModel {
+class AdiciModel {
 
     public static function listarTodos($conn) {
 
@@ -20,7 +20,7 @@ class ClientModel {
 
     public static function deletar($conn) {
         
-    }
+    } 
 }
 
 ?>
