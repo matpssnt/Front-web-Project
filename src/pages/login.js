@@ -62,7 +62,7 @@ export default function renderLoginPage() {
         const senha = inputSenha.value.trim();
  
         try {
-            const result = await loginRequest(email, password);
+            const result = await loginRequest(email, senha);
             saveToken(result.token);
             console.log("Login realizado com sucesso");
             window.location.pathname = "/Possonato/home";

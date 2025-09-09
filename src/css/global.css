@@ -1,3 +1,7 @@
+/* #root {                     */
+/*     flex-direction: column; */
+/* }                           */
+
 .titulo {
     font-family: "Lato, sans-serif";
     font-weight: 700;
@@ -17,4 +21,72 @@
 .btn-primary {
     background-color: rgb(161, 101, 10);
     border: none;
+}
+
+/* NOVOS ESTILOS PARA O HERO */
+
+.hero-frame {
+    width: 56vh; /* Limite de largura */
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    overflow: hidden; /* Impede que a imagem saia do quadro */
+    background: #0000008a; /* Aplicar cor de fundo quando a imagem não ocupa todo o espaço */
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    /* Aplica propriedade cover para que a imagem preencha o quadro */
+    object-fit: cover;
+    object-position: center; /* Centraliza o recorte da */
+}
+
+/* NOVOS ESTILOS PARA O CARD */
+
+.card-container {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilo para o carrossel dentro do card */
+.card .carousel {
+    border-top-left-radius: calc(0.375rem - 1px);
+    border-top-right-radius: calc(0.375rem - 1px);
+    overflow: hidden;
+}
+
+.room-card {
+    width: 700px; /* Card mais largo */
+    max-width: 95%; /* Responsivo */
+    margin: 0 auto; /* Centraliza */
+}
+
+.room-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza conteúdo internamente */
+    text-align: center; /* Texto centralizado */
+}
+
+.room-card .card-text {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.room-card .btn {
+    width: 80%; /* Botão mais largo */
+    padding: 12px;
+}
+
+/* Ajuste para o carrossel ficar proporcional */
+.room-card .carousel {
+    height: 250px;
+}
+
+.room-card .carousel-inner,
+.room-card .carousel-item,
+.room-card .card-img-top {
+    height: 100%;
+    object-fit: cover;
 }
