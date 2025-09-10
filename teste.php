@@ -13,7 +13,7 @@ $data = [
     "disponivel" => 1
 ];
 
-RoomController::create($conn, $data);
+RoomController::getAll($conn);
 
 //$data = [
 //    "email"=>"mateus@gmail.com",
