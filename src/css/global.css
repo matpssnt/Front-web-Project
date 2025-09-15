@@ -26,19 +26,21 @@
 /* NOVOS ESTILOS PARA O HERO */
 
 .hero-frame {
-    width: 56vh; /* Limite de largura */
-    /* max-width: 1200px; */
-    margin: 0 auto;
     overflow: hidden; /* Impede que a imagem saia do quadro */
-    background: #0000008a; /* Aplicar cor de fundo quando a imagem não ocupa todo o espaço */
 }
 
-.hero-img {
-    width: 100%;
-    height: 100%;
-    /* Aplica propriedade cover para que a imagem preencha o quadro */
+.hero img, .hero{
+    /* Aplica propriedade cover para recortar parte da imagem (e não distorce-lá),
+    definindo seu ponto de foco a partir da propriedade object-position */
     object-fit: cover;
-    object-position: center; /* Centraliza o recorte da */
+    object-position: center; /* Centraliza o recorte da imagem */
+    height: 70vh;
+}
+
+@media (max-width: 576px) {
+    .hero img, .hero{
+        height: 50vh;
+    }
 }
 
 /* NOVOS ESTILOS PARA O CARD */
