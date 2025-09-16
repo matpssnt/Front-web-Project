@@ -27,12 +27,14 @@ export default function renderHomePage() {
     const dateSelect = DateSelector();
     home.appendChild(dateSelect);
 
-    const card = document.getElementById('card-container');
-    card.innerHTML = '';
-
-    const containerCard = RoomCard();
-    card.appendChild(containerCard);
-
+    const card = document.createElement('div');
+    card.className = "cardContainer";
     
 
+    for (var i=0; i < 3; i++) {
+        const cardContainer = RoomCard();
+        card.appendChild(cardContainer);
+    }
+
+    home.appendChild(card);
 }

@@ -1,34 +1,37 @@
 export default function RoomCard() {
     const card = document.createElement('div');
-    card.className = 'card-container'; 
+    card.className = 'cardContainer'; 
     card.innerHTML = `
 <div class="card" style="width: 22rem;">
 
     <!-- Carrossel Bootstrap -->
-    <div id="carouselRoom" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+    <div id="carouselExampleIndicators-RoomCard" class="carousel slide">
 
-            <div class="carousel-item active">
-                <img src="publics/assets/img/room1.jpg" class="d-block w-100 card-img-top" alt="Quarto 1">
-            </div>
-
-            <div class="carousel-item">
-                <img src="publics/assets/img/room2.jpg" class="d-block w-100 card-img-top" alt="Quarto 2">
-            </div>
-
-            <div class="carousel-item">
-                <img src="publics/assets/img/room3.jpg" class="d-block w-100 card-img-top" alt="Quarto 3">
-            </div>
-
+        <div class="carousel-indicators">
+            <button visually-hiddentype="button" data-bs-target="#carouselExampleIndicators-RoomCard" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators-RoomCard" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators-RoomCard" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselRoom" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <div class="carousel-inner shadow">
+            <div class="carousel-item active">
+                <img src="publics/assets/img/room1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="publics/assets/img/room2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="publics/assets/img/room3.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators-RoomCard" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
 
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselRoom" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators-RoomCard" data-bs-slide="next">
+            <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
@@ -37,10 +40,6 @@ export default function RoomCard() {
         <h5 class="card-title titulo">Suíte Luxo</h5>
         <p class="card-text">Desfrute do conforto da nossa Suíte Luxo com todas as comodidades.</p>
         <a href="#" class="btn btn-primary">Reservar</a>
-    </div>
-
-    <div class="card room-card"> <!-- Adicione a classe room-card aqui -->
-        <!-- Conteúdo do card -->
     </div>
 
 </div>`;

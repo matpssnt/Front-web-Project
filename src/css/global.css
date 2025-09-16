@@ -1,5 +1,7 @@
 #root {                    
     flex-direction: column;
+    gap: 10vh;
+    margin-bottom: 10vh;
 }                          
 
 .titulo {
@@ -49,7 +51,7 @@
 
 /* NOVOS ESTILOS PARA O CARD */
 
-.card-container {
+.cardContainer {
     margin: 15px;
     display: flex;
     justify-content: center;
@@ -110,7 +112,7 @@
 
 @media (max-width: 576px) {
     .dateSelector {
-        /* height: 50vh; REMOVER ISSO */
+        /* height: 50vh; */
         flex-direction: column;
         align-items: center;
     }
