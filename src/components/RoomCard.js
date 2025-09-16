@@ -35,12 +35,14 @@ export default function RoomCard() {
             
     <div class="card-body">
         <h5 class="card-title titulo">Suíte Luxo</h5>
-            <p class="card-text">Desfrute do conforto da nossa Suíte Luxo com todas as comodidades.</p>
+        <p class="card-text">Desfrute do conforto da nossa Suíte Luxo com todas as comodidades.</p>
         <a href="#" class="btn btn-primary">Reservar</a>
     </div>
+
     <div class="card room-card"> <!-- Adicione a classe room-card aqui -->
-        <!-- conteúdo do card -->
+        <!-- Conteúdo do card -->
     </div>
+
 </div>`;
 
 return card;
