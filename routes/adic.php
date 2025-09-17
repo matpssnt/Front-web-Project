@@ -1,29 +1,29 @@
 <?php
 
-require_once __DIR__ . "/../controllers/RoomController.php";
+require_once __DIR__ . "/../controllers/AdiciController.php";
 
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
-    $id = $segments[5] ?? null;
+    $id = $segments[1] ?? null;
 
     if (isset($id) === null) {
-        RoomController::getAll($conn);
+        AdiciController::getAll($conn);
     }
     else  {
-        RoomController::getById($conn, $id);
+        AdiciController::getById($conn, $id);
     }
     
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
     $data = json_decode(file_get_contents('php://input'), true);
-    RoomController::create($conn, $data);
+    AdiciController::create($conn, $data);
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "DELETE") {
-    $id = $segments[15] ?? null;
+    $id = $segments[1] ?? null;
     
     if (isset($id)) {
-        RoomController::delete($conn, $id);
+        AdiciController::delete($conn, $id);
     }
     else {
         jsonResponse([
@@ -36,7 +36,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === "PUT") {
     $data = json_decode(file_get_contents('php://input'), true);
     $id = $data["id"];
 
-    RoomController::update($conn, $id, $data);
+    AdiciController::update($conn, $id, $data);
     
 }
 

@@ -1,15 +1,15 @@
 <?php
 
-class ReservaModel {
+class PedidoModel {
 
     public static function getAll($conn) {
-        $sql = "SELECT * FROM reservas";
+        $sql = "SELECT * FROM pedidos";
         $result = $conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public static function getById($conn, $id) {
-        $sql = "SELECT * FROM reservas WHERE id= ?";
+        $sql = "SELECT * FROM pedidos WHERE id= ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -17,15 +17,15 @@ class ReservaModel {
     }
 
     public static function create($conn, $data) {
-        $sql = "INSERT INTO reservas (pedido_id, quarto_id, fim, inicio) 
+        $sql = "INSERT INTO pedidos (usuario_id, cliente_id, data_hora, pagamento) 
         VALUES (?, ?, ?, ?);";
         
         $stat = $conn->prepare($sql);
         $stat->bind_param("iiss", 
-            $data['pedido_id'],
-            $data["quarto_id"],
-            $data["fim"],
-            $data["inicio"]
+            $data["usuario_id"],
+            $data["cliente_id"],
+            $data["data_hora"],
+            $data["pagamento"]
         );
         return $stat->execute();
     }

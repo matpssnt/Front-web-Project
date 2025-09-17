@@ -21,8 +21,8 @@ $subRoute = $segments[1] ?? null;
 
 
 if ($route != "api") {
-    require __DIR__ . "/publics/index.html";
-    //require "teste.php";
+    //require __DIR__ . "/publics/index.html";
+    require "teste.php";
     exit;
 }
 
@@ -30,7 +30,7 @@ if ($route != "api") {
 
 //Back-end para rotas de requisão (endpoint)
 elseif ($route === "api") {
-    if (in_array($subRoute, ["login", "rooms"])) {
+    if (in_array($subRoute, ["login", "rooms", "client", "adic", "request", "reserve"])) {
         require "routes/${subRoute}.php";
     } else {
         return jsonResponse(['message'=>'Rota não encontrada'], 404);

@@ -23,24 +23,24 @@ class RoomModel {
         $stat = $conn->prepare($sql);
         $stat->bind_param("sidiii", 
             $data['nome'],
-            $data['num'],
-            $data['preco'],
-            $data['qtd_s'],
-            $data['qtd_c'],
+            $data["num"],
+            $data["preco"],
+            $data["qtd_cama_s"],
+            $data["qtd_cama_c"],
             $data['disponivel']
         );
         return $stat->execute();
     }
 
     public static function update($conn, $id, $data) {
-        $sql = "UPDATE quartos SET nome=?, numero=?, qtd_cama_casal=?, qtd_cama_solteiro=?, preco=?, disponivel=? WHERE id= ?";
+        $sql = "UPDATE quartos SET nome = ?, num = ?, preco = ?, qtd_cama_s = ?, qtd_cama_c = ?, disponivel = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("siiidii",
             $data["nome"],
-            $data["numero"],
-            $data["qtd_cama_casal"],
-            $data["qtd_cama_solteiro"],
+            $data["num"],
             $data["preco"],
+            $data["qtd_cama_s"],
+            $data["qtd_cama_c"],
             $data["disponivel"],
             $id
         );
