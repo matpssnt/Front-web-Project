@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../controllers/ReserveController.php";
 
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
-    $id = $segments[5] ?? null;
+    $id = $segments[2] ?? null;
 
     if (isset($id) === null) {
         ReserveController::getAll($conn);

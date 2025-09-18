@@ -17,14 +17,13 @@ class PedidoModel {
     }
 
     public static function create($conn, $data) {
-        $sql = "INSERT INTO pedidos (usuario_id, cliente_id, data_hora, pagamento) 
-        VALUES (?, ?, ?, ?);";
+        $sql = "INSERT INTO pedidos (usuario_id, cliente_id, pagamento) 
+        VALUES (?, ?, ?);";
         
         $stat = $conn->prepare($sql);
-        $stat->bind_param("iiss", 
+        $stat->bind_param("iis", 
             $data["usuario_id"],
             $data["cliente_id"],
-            $data["data_hora"],
             $data["pagamento"]
         );
         return $stat->execute();

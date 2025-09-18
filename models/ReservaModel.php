@@ -17,15 +17,15 @@ class ReservaModel {
     }
 
     public static function create($conn, $data) {
-        $sql = "INSERT INTO reservas (pedido_id, quarto_id, fim, inicio) 
+        $sql = "INSERT INTO reservas (pedido_id, quarto_id, inicio, fim) 
         VALUES (?, ?, ?, ?);";
         
         $stat = $conn->prepare($sql);
         $stat->bind_param("iiss", 
             $data['pedido_id'],
             $data["quarto_id"],
-            $data["fim"],
-            $data["inicio"]
+            $data["inicio"],
+            $data["fim"]
         );
         return $stat->execute();
     }

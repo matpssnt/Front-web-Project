@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../controllers/RoomController.php";
 
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
-    $id = $segments[5] ?? null;
+    $id = $segments[2] ?? null;
 
     if (isset($id) === null) {
         RoomController::getAll($conn);
@@ -20,7 +20,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "DELETE") {
-    $id = $segments[15] ?? null;
+    $id = $segments[2] ?? null;
     
     if (isset($id)) {
         RoomController::delete($conn, $id);

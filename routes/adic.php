@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../controllers/AdiciController.php";
 
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
-    $id = $segments[1] ?? null;
+    $id = $segments[2] ?? null;
 
     if (isset($id) === null) {
         AdiciController::getAll($conn);
@@ -20,7 +20,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "DELETE") {
-    $id = $segments[1] ?? null;
+    $id = $segments[2] ?? null;
     
     if (isset($id)) {
         AdiciController::delete($conn, $id);
