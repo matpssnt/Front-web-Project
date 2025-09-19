@@ -18,23 +18,23 @@ export default function renderHomePage() {
     const footer = Footer();
     pezin.appendChild(footer);
 
-    const home = document.getElementById('root');
-    home.innerHTML = '';
+    const divRoot = document.getElementById('root');
+    divRoot.innerHTML = '';
     
     const containerHero = Hero();
-    home.appendChild(containerHero);
+    divRoot.appendChild(containerHero);
 
     const dateSelect = DateSelector();
-    home.appendChild(dateSelect);
+    divRoot.appendChild(dateSelect);
 
     const card = document.createElement('div');
     card.className = "cardContainer";
     
 
     for (var i=0; i < 3; i++) {
-        const cardContainer = RoomCard();
+        const cardContainer = RoomCard(i);
         card.appendChild(cardContainer);
     }
 
-    home.appendChild(card);
+    divRoot.appendChild(card);
 }

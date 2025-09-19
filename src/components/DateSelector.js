@@ -25,14 +25,14 @@ export default function DateSelector() {
     dateDiv.appendChild(dateOutput);
 
     const guestsAmount = document.createElement('select');
-    guestsAmount.innerHTML = `
-        <option value="">Quantidade de Hospedes</option>
-        <option value="1">1 pessoa</option>
-        <option value="2">2 pessoas</option>
-        <option value="3">3 pessoas</option>
-        <option value="4">4 pessoas</option>
-        <option value="5">5 ou mais pessoas</option>`;
     guestsAmount.className = 'card p-4 shadow-lg';
+    guestsAmount.innerHTML = `
+        <option value="">Number of guests</option>
+        <option value="1">1 guest</option>
+        <option value="2">2 guests</option>
+        <option value="3">3 guests</option>
+        <option value="4">4 guests</option>
+        <option value="5">5 or more guests</option>`;
     guestsAmount.style.width = '300px';
     guestsAmount.style.height = '70px';
     guestsAmount.style.maxWidth = '300px';
@@ -42,7 +42,7 @@ export default function DateSelector() {
     
     const btnDateReserv = document.createElement('button');
     btnDateReserv.type = 'submit';
-    btnDateReserv.textContent = "Pesquisar";
+    btnDateReserv.textContent = "Search";
     btnDateReserv.className = 'btn btn-primary';
     btnDateReserv.style.fontWeight = '16px';
     btnDateReserv.style.height = '69px';
