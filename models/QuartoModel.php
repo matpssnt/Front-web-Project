@@ -17,30 +17,30 @@ class RoomModel {
     }
 
     public static function create($conn, $data) {
-        $sql = "INSERT INTO quartos (nome, num, preco, qtd_cama_s, qtd_cama_c, disponivel) 
+        $sql = "INSERT INTO quartos (nome, numero, qnt_cama_casal, qnt_cama_solteiro, preco, disponivel) 
         VALUES (?, ?, ?, ?, ?, ?);";
         
         $stat = $conn->prepare($sql);
-        $stat->bind_param("sidiii", 
+        $stat->bind_param("ssiidi", 
             $data['nome'],
-            $data["num"],
+            $data["numero"],
+            $data["qnt_cama_casal"],
+            $data["qnt_cama_solteiro"],
             $data["preco"],
-            $data["qtd_cama_s"],
-            $data["qtd_cama_c"],
             $data['disponivel']
         );
         return $stat->execute();
     }
 
     public static function update($conn, $id, $data) {
-        $sql = "UPDATE quartos SET nome = ?, num = ?, preco = ?, qtd_cama_s = ?, qtd_cama_c = ?, disponivel = ? WHERE id = ?";
+        $sql = "UPDATE quartos SET nome = ?, numero = ?, qnt_cama_casal = ?, qnt_cama_solteiro = ?, preco = ?, disponivel = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("siiidii",
+        $stmt->bind_param("ssiidii",
             $data["nome"],
-            $data["num"],
+            $data["numero"],
+            $data["qnt_cama_casal"],
+            $data["qnt_cama_solteiro"],
             $data["preco"],
-            $data["qtd_cama_s"],
-            $data["qtd_cama_c"],
             $data["disponivel"],
             $id
         );

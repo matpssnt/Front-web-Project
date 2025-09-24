@@ -1,16 +1,31 @@
 <?php
 
 require_once __DIR__ . "/../models/ClienteModel.php";
+require_once __DIR__ . "/../controllers/ValidateController.php";
 
 class ClientController{
     public static function create($conn, $data) {
+
+        $validacao = ValidateController::AuthClient($data);
+        
+        if (!$validacao['sucesso']) {
+            return jsonResponse($validacao, 400);
+        }
+
+
         $result = ClienteModel::create($conn, $data);
         
         if ($result) {
-            return jsonResponse(['message'=>'Cliente registrado com sucesso"']);
+            return jsonResponse([
+                'sucesso' => true,
+                'message'=>'Cliente registrado com sucesso"'
+            ]);
         }
         else {
-            return jsonResponse(['message'=>'Erro ao registrar o quarto!']);
+            return jsonResponse([
+                'sucesso' => false,
+                'message'=>'Erro ao registrar o cliente!'
+            ]);
         }
     }
 

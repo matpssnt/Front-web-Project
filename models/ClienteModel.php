@@ -17,29 +17,31 @@ class ClienteModel {
     }
 
     public static function create($conn, $data) {
-        $sql = "INSERT INTO clientes (login_id, nome, cpf, telefone, cargo_id) 
-        VALUES (?, ?, ?, ?, ?);";
+        $sql = "INSERT INTO clientes (nome, email, telefone, cpf, cargo_id, senha) 
+        VALUES (?, ?, ?, ?, ?, ?);";
         
         $stat = $conn->prepare($sql);
-        $stat->bind_param("isssi", 
-            $data["login_id"],
+        $stat->bind_param("ssssis", 
             $data["nome"],
+            $data["email"],
             $data["cpf"],
             $data["telefone"],
-            $data["cargo_id"]
+            $data["cargo_id"],
+            $data["senha"],
         );
         return $stat->execute();
     }
 
     public static function update($conn, $id, $data) {
-        $sql = "UPDATE clientes SET login_id = ?, nome = ?, cpf = ?, telefone = ?, cargo_id = ? WHERE id = ?";
+        $sql = "UPDATE clientes SET nome = ?, email = ?, telefone = ?, cpf = ?, cargo_id = ?, senha = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("isssii",
-            $data["login_id"],
+        $stmt->bind_param("ssssisi",
             $data["nome"],
             $data["cpf"],
+            $data["email"],
             $data["telefone"],
             $data["cargo_id"],
+            $data["senha"],
             $id
         );
         return $stmt->execute();

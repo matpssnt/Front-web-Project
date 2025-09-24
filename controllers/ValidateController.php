@@ -1,38 +1,38 @@
 <?php
 
 
-class ValidateRoutes {
+class ValidateController {
 
     public static function AuthClient($data) {
         $validateCamps = [
-            'login_id', 'nome', 'cpf', 'telefone', 'cargo_id'
+            'nome', 'email', 'telefone', 'cpf', 'cargo_id', 'senha'
         ];
         
-        return self::validarCampos($data, $fieldsInportant, 'Cliente');
+        return self::validarCampos($data, $validateCamps, 'Cliente');
     }
 
     public static function AuthRoom($data) {
         $validateCamps = [
-            'nome', 'num', 'preco', 'qtd_cama_s', 'qtd_cama_c', 'disponivel'
+            'nome', 'numero', 'qnt_cama_solteiro', 'qnt_cama_casal', 'preco', 'disponivel'
         ];
         
-        return self::validarCampos($data, $fieldsInportant, 'Quarto');
+        return self::validarCampos($data, $validateCamps, 'Quarto');
     }
 
     public static function AuthReserv($data) {
         $validateCamps = [
-            'pedido_id', 'quarto_id', 'inicio', 'fim'
+            'pedido_id', 'quarto_id', 'adicional_id', 'inicio', 'fim'
         ];
         
-        return self::validarCampos($data, $fieldsInportant, 'Reserva');
+        return self::validarCampos($data, $validateCamps, 'Reserva');
     }
 
     public static function AuthRequest($data) {
         $validateCamps = [
-            'usuario_id', 'cliente_id', 'data_hora', 'pagamento'
+            'usuario_id', 'cliente_id', 'data', 'pagamento'
         ];
         
-        return self::validarCampos($data, $fieldsInportant, 'Pedido');
+        return self::validarCampos($data, $validateCamps, 'Pedido');
     }
 
     public static function AuthAdic($data) {
@@ -40,17 +40,17 @@ class ValidateRoutes {
             'nome', 'preco'
         ];
         
-        return self::validarCampos($data, $fieldsInportant, 'Adicional');
+        return self::validarCampos($data, $validateCamps, 'Adicional');
     }
 
 
 
-    private static function validarCampos($data, $fieldsInportant, $entidade) {
+    private static function validarCampos($data, $validateCamps, $entidade) {
         $camposFaltantes = [];
         
-        foreach ($fieldsInportant as $fields) {
-            if (!isset($data[$fields]) || empty(trim($data[$fields]))) {
-                $camposFaltantes[] = $fields;
+        foreach ($validateCamps as $camps) {
+            if (!isset($data[$camps]) || empty(trim($data[$camps]))) {
+                $camposFaltantes[] = $camps;
             }
         }
         
@@ -91,24 +91,33 @@ class ValidateRoutes {
                 break;
                 
             case 'Usuário':
-                if (isset($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                    $erros[] = 'Email inválido';
+                if (isset($data['nome']) && empty(trim($data['nome']))) {
+                    $erros[] = 'O preenchimento do nome é obrigatório';
                 }
                 if (isset($data['senha']) && strlen($data['senha']) < 6) {
-                    $erros[] = 'Senha deve ter pelo menos 6 caracteres';
+                    $erros[] = 'A senha deve ter pelo menos 6 caractéres';
                 }
                 break;
                 
             case 'Reserva':
-                if (isset($data['data_entrada']) && isset($data['data_saida'])) {
-                    if (strtotime($data['data_entrada']) >= strtotime($data['data_saida'])) {
-                        $erros[] = 'Data de entrada deve ser anterior à data de saída';
+                if (isset($data['inicio']) && isset($data['fim'])) {
+                    if (strtotime($data['inicio']) >= strtotime($data['fim'])) {
+                        $erros[] = 'Data de checkin deve ser anterior à data de checkout';
                     }
                 }
                 break;
         }
         
         return $erros;
+    }
+        
+    private static function validarCPF($cpf) {
+        $cpf = preg_replace('/[^0-9]/', '', $cpf);
+        
+        if (strlen($cpf) != 11) {
+            return false;
+        }
+        return true;
     }
 }
 

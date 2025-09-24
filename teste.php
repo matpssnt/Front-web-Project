@@ -28,7 +28,7 @@ ClientController::getAll($conn);
 
 //$data = [
 //    "email"=>"mateus@gmail.com",
-//    "password"=>"1234"
+//    "password"=>"123"
 //];
 //
 //AuthController::login($conn, $data);
