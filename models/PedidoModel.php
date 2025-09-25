@@ -29,6 +29,26 @@ class PedidoModel {
         return $stat->execute();
     }
 
+    public static function update($conn, $id, $data) {
+        $sql = "UPDATE pedidos SET usuario_id = ?, cliente_id = ?, data = ?, pagamento = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iissi",
+            $data["usuario_id"],
+            $data["cliente_id"],
+            $data["data"],
+            $data["pagamento"],
+            $id
+        );
+        return $stmt->execute();
+    }
+
+    public static function delete($conn, $id) {
+        $sql = "DELETE FROM pedidos WHERE id= ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
+
 }
 
 ?>

@@ -24,6 +24,24 @@ class RequestController{
         return jsonResponse($result);
     }
 
+    public static function update($conn, $id, $data){
+        $result = PedidoModel::update($conn, $id, $data);
+        if($result){
+            return jsonResponse(['message'=> 'Pedido atualizado']);
+        } else{
+            return jsonResponse(['message'=> 'DNão foi possivel atualizar o pedido'], 400);
+        }
+    }
+
+    public static function delete($conn, $id) {
+        $result = PedidoModel::delete($conn, $id);
+         if($result){
+            return jsonResponse(['message'=> 'Pedido excluído']);
+        } else{
+            return jsonResponse(['message'=> ''], 400);
+        }
+    }
+
 }
 
 ?>

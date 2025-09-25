@@ -3,6 +3,8 @@
 require_once __DIR__ . "/../models/QuartoModel.php";
 
 class RoomController{
+    public static AuthRoom = ['nome', 'numero', 'qnt_cama_casal', 'qnt_cama_solteiro', 'preco', 'disponivel'];
+    
     public static function create($conn, $data) {
         $result = RoomModel::create($conn, $data);
         
