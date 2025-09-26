@@ -1,8 +1,13 @@
-import Navbar from "../components/Navbar.js";
-import Footer from "../components/Footer.js";
-import Hero from "../components/Hero.js";
+import barraCategoria from "../components/CartBuy.js";
+import Navbar from "../components/NavBar.js";
+import InfoRooms from "../components/InfoRoom.js";
 
-export default function renderCartPage() {
+
+export default function RenderCarrinhoPage(){
+    
+    const divRoot = document.getElementById('root');
+    divRoot.innerHTML = '';
+    divRoot.style.gap = '8px';
 
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
@@ -10,12 +15,15 @@ export default function renderCartPage() {
     const navbar = Navbar();
     nav.appendChild(navbar);
 
-    const pezin = document.getElementById('footer');
-    pezin.innerHTML = '';
-        
-    const footer = Footer();
-    pezin.appendChild(footer);
+    const categorias = barraCategoria();
+    divRoot.appendChild(categorias);
 
-    const divRoot = document.getElementById('root');
-    divRoot.innerHTML = '';
+    for(var i=0; i<1; i++){
+        const informacoes = quartosInformacoes();
+        divRoot.appendChild(informacoes);
+    };
+
+    
+
+
 }
