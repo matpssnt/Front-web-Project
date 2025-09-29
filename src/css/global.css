@@ -63,42 +63,6 @@
     overflow: hidden;
 }
 
-.room-card {
-    width: 700px; /* Card mais largo */
-    max-width: 95%; /* Responsivo */
-    margin: 0 auto; /* Centraliza */
-}
-
-.room-card .card-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza conteúdo internamente */
-    text-align: center; /* Texto centralizado */
-}
-
-.room-card .card-text {
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-.room-card .btn {
-    width: 80%; /* Botão mais largo */
-    padding: 12px;
-}
-
-/* Ajuste para o carrossel ficar proporcional */
-.room-card .carousel {
-    height: 250px;
-}
-
-.room-card .carousel-inner,
-.room-card .carousel-item,
-.room-card .card-img-top {
-    height: 100%;
-    object-fit: cover;
-}
-
-
 
 /* NOVOS ESTILOS PARA O DATE */
 
@@ -139,4 +103,24 @@
 .inputDate{
     font-size: 18px;
     margin-bottom: 0px;
+}
+
+
+/* NOVOS ESTILOS PARA O CART */
+
+.border-right {
+  border-right: 1px solid #000;
+}
+
+.table-color{
+    background-color: #4b0505;
+    color: #ccc;
+}
+
+.grid {
+    width: 70%;
+}
+
+.total {
+    font-weight: 700;
 }

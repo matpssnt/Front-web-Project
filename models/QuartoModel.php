@@ -3,7 +3,7 @@
 class RoomModel {
 
     public static function getAll($conn) {
-        $sql = "SELECT * FROM quartos";
+        $sql = "SELECT * FROM quartos;";
         $result = $conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -54,8 +54,23 @@ class RoomModel {
         return $stmt->execute();
     }
 
-    public static function buscarDisponivel($conn) {
-
+    public static function buscarDisponivel($conn, $data) {
+        $sql = "SELECT *
+        FROM quartos
+        WHERE quartos.disponivel = 1
+        AND (quartos.qnt_cama_casal * 2 + quartos.qnt_cama_solteiro) >= ?
+        AND quartos.id NOT IN (
+            SELECT reservas.quarto_id
+            FROM reservas
+            WHERE NOT (reservas.fim <= ? AND reservas.inicio >= ?));";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iss",
+            $data['qnt'],
+            $data['inicio'],
+            $data['fim']
+        );
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
 

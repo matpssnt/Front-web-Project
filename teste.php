@@ -20,8 +20,8 @@ $data = [
     "disponivel" => 1
 ];
 
-ClientController::getAll($conn);
-//RoomController::getAll($conn);
+//ClientController::getAll($conn);
+RoomController::getAll($conn);
 //ReserveController::getAll($conn);
 //RequestController::getAll($conn);
 //AdiciController::getAll($conn);

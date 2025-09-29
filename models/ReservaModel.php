@@ -31,6 +31,8 @@ class ReservaModel {
         return $stat->execute();
     }
 
+    public static function 
+
 }
 
 ?>

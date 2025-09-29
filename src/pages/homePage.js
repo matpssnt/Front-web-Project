@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar.js";
 import Footer from "../components/Footer.js";
 import RoomCard from "../components/RoomCard.js";
 import DateSelector from "../components/DateSelector.js";
+import CarouselCard from "../components/CarouselCard.js";
 
 export default function renderHomePage() {
 
@@ -30,11 +31,16 @@ export default function renderHomePage() {
     const card = document.createElement('div');
     card.className = "cardContainer";
     
-
     for (var i=0; i < 3; i++) {
         const cardContainer = RoomCard(i);
         card.appendChild(cardContainer);
     }
 
-    divRoot.appendChild(card);
+    const carouselCard = CarouselCard();
+    const divCarousel = carouselCard.querySelector('div[id="divCarousel"]');
+
+
+    divCarousel.appendChild(card);
+
+    divRoot.appendChild(carouselCard);
 }
