@@ -1,5 +1,6 @@
 <?php
 
+
 class ClienteModel {
 
     public static function getAll($conn) {
@@ -17,17 +18,16 @@ class ClienteModel {
     }
 
     public static function create($conn, $data) {
-        $sql = "INSERT INTO clientes (nome, email, telefone, cpf, cargo_id, senha) 
-        VALUES (?, ?, ?, ?, ?, ?);";
+        $sql = "INSERT INTO clientes (nome, email, telefone, cpf, senha) 
+        VALUES (?, ?, ?, ?, ?);";
         
         $stat = $conn->prepare($sql);
-        $stat->bind_param("ssssis", 
+        $stat->bind_param("sssss", 
             $data["nome"],
             $data["email"],
-            $data["cpf"],
             $data["telefone"],
-            $data["cargo_id"],
-            $data["senha"],
+            $data["cpf"],
+            $data["senha"]
         );
         return $stat->execute();
     }
@@ -52,6 +52,25 @@ class ClienteModel {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         return $stmt->execute();
+    }
+
+    public static function clientValidation($conn, $email, $password) {
+        $sql = "SELECT clientes.id, clientes.nome, clientes.email, clientes.senha FROM clientes WHERE clientes.email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+ 
+        if($client = $result->fetch_assoc()) {
+        
+            if(PasswordController::validateHash($password, $client['senha'])) {
+                unset($client['senha']);
+                return $client;  
+            }
+
+        return false;
+        
+        }
     }
 }
 

@@ -21,7 +21,7 @@ $data = [
 ];
 
 //ClientController::getAll($conn);
-RoomController::getAll($conn);
+//RoomController::getAll($conn);
 //ReserveController::getAll($conn);
 //RequestController::getAll($conn);
 //AdiciController::getAll($conn);

@@ -65,7 +65,7 @@ export default function renderLoginPage() {
             const result = await loginRequest(email, senha);
             saveToken(result.token);
             console.log("Login realizado com sucesso");
-            window.location.pathname = "/Possonato/home";
+            // window.location.pathname = "/Possonato/home";
         }
        
         catch {
