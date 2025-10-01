@@ -53,6 +53,9 @@ export default function renderLoginPage() {
      //Inputs e botão presentes no form
     const inputEmail = contentForm.querySelector('input[type="email"]');
     const inputSenha = contentForm.querySelector('input[type="password"]');
+
+    inputEmail.className = 'input';
+    inputSenha.className = 'input';
     //const btn = contentForm.querySelector('button[type="submit"]');
  
     //Monitora o clique no botão para acionar um evento de submeter os dados do form

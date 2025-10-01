@@ -5,7 +5,7 @@ require_once __DIR__ . "/../controllers/ClientController.php";
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
     $id = $segments[2] ?? null;
 
-    if (isset($id) === null) {
+    if ($id === null) {
         ClientController::getAll($conn);
     }
     else  {

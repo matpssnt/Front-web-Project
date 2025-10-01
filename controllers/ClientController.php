@@ -1,29 +1,29 @@
 <?php
 
-require_once __DIR__ . "/../models/ClienteModel.php";
-require_once __DIR__ . "/../controllers/ValidateController.php";
-
 require_once "PasswordController.php";
+
+require_once __DIR__ . "/../models/ClienteModel.php";
+require_once __DIR__ . "/../controllers/AuthController.php";
 require_once __DIR__ . "/../helpers/token_jwt.php";
 
 
 class ClientController{
     public static function create($conn, $data) {
 
+    $login = [
+        "email" => $data["email"];
+        "password" => $data["senha"];
+    ]
+
     $data['senha'] = PasswordController::generateHash($data['senha']);
     $result = ClienteModel::create($conn, $data);
         
         if ($result) {
-            return jsonResponse([
-                'sucesso' => true,
-                'message'=>'Cliente registrado com sucesso"'
-            ]);
+            AuthController::loginClient($conn, $login);
         }
         else {
             return jsonResponse([
-                'sucesso' => false,
-                'message'=>'Erro ao registrar o cliente!'
-            ]);
+                'message'=>'Erro ao cadastrar cliente'], 400);
         }
     }
 

@@ -5,7 +5,7 @@ require_once __DIR__ . "/../controllers/RoomController.php";
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
     $id = $segments[2] ?? null;
 
-    if (isset($id) === null) {
+    if ($id === null) {
         RoomController::getAll($conn);
     }
     else  {

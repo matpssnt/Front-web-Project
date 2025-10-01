@@ -29,9 +29,7 @@ class ReservaModel {
             $data["inicio"]
         );
         return $stat->execute();
-    }
-
-    public static function 
+    } 
 
 }
 

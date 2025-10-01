@@ -1,7 +1,7 @@
 export async function loginRequest(email, password) {
     const dados = {email, password};
 
-    const response = await fetch ("api/clientlogin", {
+    const response = await fetch ("api/login/client", {
         method: "POST",
         headers: {
             "Accept":"application/json",
