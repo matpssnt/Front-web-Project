@@ -1,6 +1,7 @@
 <?php
 require_once "config/db.php";
 require_once "helpers/response.php";
+require_once "helpers/token_jwt.php";
 
 if ($erroDB) {
     echo "Erro na conexão";

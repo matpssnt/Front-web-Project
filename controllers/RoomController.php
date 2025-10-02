@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../models/QuartoModel.php";
 
-class RoomController{
+class RoomController {
     
     public static function create($conn, $data) {
         $result = RoomModel::create($conn, $data);
@@ -34,7 +34,7 @@ class RoomController{
         }
     }
 
-    public static function update($conn, $id, $data){
+    public static function update($conn, $id, $data) {
         $result = RoomModel::update($conn, $id, $data);
         if($result){
             return jsonResponse(['message'=> 'Room atualizado']);
@@ -42,6 +42,15 @@ class RoomController{
             return jsonResponse(['message'=> 'Deu merda'], 400);
         }
     }
-}
 
+    public static function searchDisp($conn, $data) {
+        $resultado = RoomModel::buscarDisponivel($conn, $data);
+        if ($resultado !== false && !empty($resultado)) {
+            return jsonResponse(['message'=>"quartos Disponiveis", 'data'=> $resultado]);
+            
+        } else {
+            return jsonResponse(['message'=>"Erro ao buscar quartos disponiveis"], 404); 
+        }
+    }
+}
 ?>

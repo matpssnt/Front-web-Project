@@ -23,9 +23,23 @@ function validateToken($token) {
         return $decode->sub;
     }
     catch (Exception $error) {
-        return 'deu erro';
+        return 'FALSO';
+    }
+}
+
+function  validateTokenAPI() {
+    $headers = getallheaders();
+
+    if ( !isset($headers['Authorization']) ) {
+        jsonResponse(['message'=>'Token ausente'], 401);
+        exit;
     }
 
+    $token = str_replace("Bearer", "", $headers['Authorization']);
+        if ( !validateToken($token) ) {
+        jsonResponse(['message'=>'Token inválido'], 401);
+        exit;
+    }
 }
 
 

@@ -56,21 +56,30 @@ class RoomModel {
 
     public static function buscarDisponivel($conn, $data) {
         $sql = "SELECT *
-        FROM quartos
-        WHERE quartos.disponivel = 1
-        AND (quartos.qnt_cama_casal * 2 + quartos.qnt_cama_solteiro) >= ?
-        AND quartos.id NOT IN (
-            SELECT reservas.quarto_id
-            FROM reservas
-            WHERE NOT (reservas.fim <= ? AND reservas.inicio >= ?));";
+        FROM quartos q
+        WHERE q.disponivel = 1
+        AND (q.qnt_cama_casal * 2 + q.qnt_cama_solteiro) >= ?
+        AND q.id NOT IN (
+            SELECT r.quarto_id
+            FROM reservas r
+            WHERE (r.fim >= ? AND r.inicio <= ?));";
+
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iss",
-            $data['qnt'],
+            $data['capacidade'],
             $data['inicio'],
             $data['fim']
         );
+
         $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result();
+        $rooms = [];
+            
+        while ($row = $result->fetch_assoc()) {
+            $rooms[] = $row;
+        }
+        
+        return $rooms;
     }
 }
 
