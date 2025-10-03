@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../models/QuartoModel.php";
+require_once  "ValidateController.php";
 
 class RoomController {
     
@@ -44,9 +45,14 @@ class RoomController {
     }
 
     public static function searchDisp($conn, $data) {
+        ValidateController::validate_data($data, ["inicio", "fim", "capacidade"]);
+        
+        $data['inicio'] = ValidateController::fix_dateHour($data["inicio"], 14);
+        $data["fim"] = ValidateController::fix_dateHour($data["fim"], 12);
+
         $resultado = RoomModel::buscarDisponivel($conn, $data);
         if ($resultado !== false && !empty($resultado)) {
-            return jsonResponse(['message'=>"quartos Disponiveis", 'data'=> $resultado]);
+            return jsonResponse(['message'=>"quartos Disponiveis", 'Quartos'=> $resultado]);
             
         } else {
             return jsonResponse(['message'=>"Erro ao buscar quartos disponiveis"], 404); 

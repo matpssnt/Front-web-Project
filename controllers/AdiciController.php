@@ -4,6 +4,8 @@ require_once __DIR__ . "/../models/AdicionalModel.php";
 
 class AdiciController{
     public static function create($conn, $data) {
+        ValidatorController::validate_data($data, ["nome", "preco"]);
+        
         $result = AdicionalModel::create($conn, $data);
         
         if ($result) {

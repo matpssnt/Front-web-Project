@@ -10,20 +10,18 @@ class ValidateController {
                 $pendets[] = $lbl;
             }
         }
-        return $pendets;
+        if(!empty($pendets) ){
+            $pendets = implode(", ", $pendets);
+            jsonResponse(['message'=>"Erro, Falta o campo: ". $pendets], 400);
+            exit;
+        }
     }
 
-    public static function fix_dateHour($data) {
-        $inicio = new DateTime($data['inicio']);
-        $fim = new DateTime($data['fim']);
-        
-        $inicio->setTime(14, 0, 0);
-        $fim->setTime(12, 0, 0);
-           
-        $data['inicio'] = $inicio->format('Y-m-d H:i:s');
-        $data['fim'] = $fim->format('Y-m-d H:i:s');
+    public static function fix_dateHour($date, $hour) {
+        $dateHour = new DateTime($date);
+        $dateHour->setTime($hour, 0, 0);
+        return $dateHour->format('Y-m-d H:i:s');
     }
-}
 
 
 

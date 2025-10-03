@@ -4,6 +4,7 @@ import Footer from "../components/Footer.js";
 import RoomCard from "../components/RoomCard.js";
 import DateSelector from "../components/DateSelector.js";
 import CarouselCard from "../components/CarouselCard.js";
+import { listAvailableRoomsRequest } from "../api/roomAPI.js";
 
 export default function renderHomePage() {
 
@@ -28,6 +29,24 @@ export default function renderHomePage() {
     const dateSelect = DateSelector();
     divRoot.appendChild(dateSelect);
 
+    const btnSearchRoom = dateSelect.querySelector('button');
+
+    btnSearchRoom.addEventListener("click", async(e) => {
+        e.preventDefault();
+
+        const inicio = "2025-09-15";
+        const fim = "2025-09-24";
+        const capacidade = "2";
+
+        try {
+            const result = await listAvailableRoomsRequest({inicio, fim, capacidade});
+        }
+        catch(error) {
+            console.log(error);
+        }
+        
+    })
+
     const card = document.createElement('div');
     card.className = "cardContainer";
     
@@ -36,11 +55,5 @@ export default function renderHomePage() {
         card.appendChild(cardContainer);
     }
 
-    const carouselCard = CarouselCard();
-    const divCarousel = carouselCard.querySelector('div[id="divCarousel"]');
-
-
-    divCarousel.appendChild(card);
-
-    divRoot.appendChild(carouselCard);
+    divRoot.appendChild(card);
 }
