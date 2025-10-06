@@ -5,8 +5,10 @@ import Footer from "../components/Footer.js";
 
 export default function renderLoginPage() {
 
-    const formu = Form();
-    const contentForm = formu.querySelector('form');
+    const formu = Form(true);
+
+    const contentForm = formu.formElement;
+    const userTypeSelector = formu.userTypeSelector;
 
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
@@ -56,24 +58,53 @@ export default function renderLoginPage() {
 
     inputEmail.className = 'input';
     inputSenha.className = 'input';
-    //const btn = contentForm.querySelector('button[type="submit"]');
+
+    function getType() {
+        if (!userTypeSelector) return 'client'; // Padrão se não houver seletor
+        
+        const clientRadio = userTypeSelector.querySelector('#clientType');
+        const employeeRadio = userTypeSelector.querySelector('#employeeType');
+
+        if (clientRadio && clientRadio.checked) {
+            return 'client';
+        } else if (employeeRadio && employeeRadio.checked) {
+            return 'employee';
+        }
+
+        return 'client';
+    }
+
+    
+
+    async function handleLogin(email, senha) {
+        const userType = getType();
+        
+        try {
+            // Modificação na função loginRequest para aceitar tipo de usuário
+            const result = await loginRequest(email, senha, userType);
+            saveToken(result.token);
+            console.log(`Login de ${userType} realizado com sucesso`);
+            // Redirecionamento baseado no tipo de usuário, se necessário
+            // window.location.pathname = userType === 'employee' 
+            //     ? "/Possonato/admin" 
+            //     : "/Possonato/home";
+        } catch (error) {
+            console.log("Erro inesperado!", error);
+        }
+    }
  
     //Monitora o clique no botão para acionar um evento de submeter os dados do form
     contentForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const email = inputEmail.value.trim();
         const senha = inputSenha.value.trim();
- 
-        try {
-            const result = await loginRequest(email, senha);
-            saveToken(result.token);
-            console.log("Login realizado com sucesso");
-            // window.location.pathname = "/Possonato/home";
+
+        if (!email || !senha) {
+            console.log("Por favor, preencha todos os campos");
+            return;
         }
-       
-        catch {
-            console.log("Erro inesperado!");
-        }
+        
+        await handleLogin(email, senha);
     });
  
 }

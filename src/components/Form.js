@@ -1,4 +1,4 @@
-export default function Form() {
+export default function Form(showTypeSelector = true) {
 
     const divRoot = document.getElementById('root');
     divRoot.innerHTML = '';
@@ -16,6 +16,21 @@ export default function Form() {
     titulo.textContent = 'Faça seu login';
     titulo.className = 'titulo';
 
+    let userTypeSelector = null;
+    if (showTypeSelector) {
+        userTypeSelector = document.createElement('div');
+        userTypeSelector.className = 'user-type-selector mb-4';
+        userTypeSelector.innerHTML = `
+            <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="userType" id="clientType" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="clientType">Hóspede/Cliente</label>
+                
+                <input type="radio" class="btn-check" name="userType" id="employeeType" autocomplete="off">
+                <label class="btn btn-outline-primary" for="employeeType">Funcionário</label>
+            </div>
+        `;
+        container.appendChild(userTypeSelector);
+    }
 
     const formu = document.createElement('form');
     formu.className = 'd-flex flex-column';
@@ -39,5 +54,8 @@ export default function Form() {
     container.appendChild(titulo);
     container.appendChild(formu);
     
+    container.userTypeSelector = userTypeSelector;
+    container.formElement = formu;
+
     return container;
 }

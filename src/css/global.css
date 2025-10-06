@@ -126,8 +126,46 @@ input:focus {
     margin-bottom: 0px;
 }
 
+/* NOVOS ESTILOS PARA O TIPO DE LOGIN */
 
-/* NOVOS ESTILOS PARA O CART */
+.user-type-selector {
+    font-family: "Lato", sans-serif;
+}
+
+.user-type-selector .btn-group {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgb(161, 101, 10);
+}
+
+.user-type-selector .btn {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+    border: none;
+    padding: 12px 0;
+    background-color: white;
+    color: rgb(161, 101, 10);
+    transition: all 0.3s ease;
+}
+
+.user-type-selector .btn:hover {
+    background-color: rgba(161, 101, 10, 0.1);
+    color: rgb(161, 101, 10);
+}
+
+.user-type-selector .btn-check:checked + .btn {
+    background-color: rgb(161, 101, 10);
+    color: white;
+    border-color: rgb(161, 101, 10);
+}
+
+.user-type-selector .btn-check:focus + .btn {
+    box-shadow: none;
+}
+
+/* NOVOS ESTILOS PARA O CART 
 
 .border-right {
   border-right: 1px solid #000;
@@ -144,4 +182,4 @@ input:focus {
 
 .total {
     font-weight: 700;
-}
+}*/
