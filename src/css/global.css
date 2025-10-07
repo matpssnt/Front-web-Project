@@ -75,6 +75,9 @@ input:focus {
     margin: 15px;
     display: flex;
     justify-content: center;
+    flex-direction: wrap;
+    align-items: center;
+    gap: 35px;
 }
 
 /* Estilo para o carrossel dentro do card */
