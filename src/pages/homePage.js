@@ -1,10 +1,11 @@
+import { listAvailableRoomsRequest } from "../api/roomAPI.js";
 import Hero from "../components/Hero.js";
 import Navbar from "../components/Navbar.js";
 import Footer from "../components/Footer.js";
 import RoomCard from "../components/RoomCard.js";
 import DateSelector from "../components/DateSelector.js";
+import Modal from "../components/Modal.js";
 import CarouselCard from "../components/CarouselCard.js";
-import { listAvailableRoomsRequest } from "../api/roomAPI.js";
 
 export default function renderHomePage() {
 
@@ -33,11 +34,22 @@ export default function renderHomePage() {
     const [dateInput, dateOutput] = dateSelect.querySelectorAll('input[type="date"]');
     const guestsAmount = dateSelect.querySelector('select');
     const btnSearchRoom = dateSelect.querySelector('button');
-
+    
+    const modal = Modal();
+    divRoot.appendChild(modal);
 
     const card = document.createElement('div');
     card.className = "cardContainer";
     card.id = "card-result";
+
+    const showModal = (message) => {
+        const modalBody = document.getElementById('modal-content');
+        modalBody.textContent = message;
+        
+        const modalElement = document.getElementById('staticBackdrop');
+        const bootstrapModal = new bootstrap.Modal(modalElement);
+        bootstrapModal.show();
+    };
 
 
     btnSearchRoom.addEventListener("click", async(e) => {
@@ -49,8 +61,7 @@ export default function renderHomePage() {
 
         //Validação do preenchimento de infos
         if (!inicio || !fim || Number.isNaN(capacidade) || (capacidade) <= 0) {
-            console.log("Preencha todos os campos!");
-             /* Aqui também é modal */
+             showModal("Preencha todos os campos!");
             return;
         }
 
@@ -59,8 +70,7 @@ export default function renderHomePage() {
 
 
         if (isNaN(dateStart) || isNaN(dateEnd) || dateStart >= dateEnd) {
-            console.log("A data de checkout deve ser posterior ao checkin!");
-            /* Aqui também é modal */
+            showModal("A data de checkout deve ser posterior ao checkin!");
             return;
         }
 
@@ -71,8 +81,7 @@ export default function renderHomePage() {
             const result = await listAvailableRoomsRequest({inicio, fim, capacidade});
 
             if (!result.length) {
-                console.log("Nenhum quarto disponível para esse período!");
-                /* O Modal vai estar aqui */
+                showModal("Nenhum quarto disponível para esse período!");
                 return;
             }
             

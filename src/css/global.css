@@ -186,3 +186,14 @@ input:focus {
 .total {
     font-weight: 700;
 }*/
+
+
+/* MODAL */
+
+.modal-body:empty {
+    display: none;
+}
+
+.modal-body p {
+    margin: 0;
+}
