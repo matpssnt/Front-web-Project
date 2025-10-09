@@ -11,9 +11,9 @@ class ClientController{
     public static function create($conn, $data) {
 
     $login = [
-        "email" => $data["email"];
-        "password" => $data["senha"];
-    ]
+        "email" => $data["email"],
+        "password" => $data["senha"]
+    ];
 
     $data['senha'] = PasswordController::generateHash($data['senha']);
     $result = ClienteModel::create($conn, $data);
