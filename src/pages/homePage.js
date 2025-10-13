@@ -5,6 +5,7 @@ import Footer from "../components/Footer.js";
 import RoomCard from "../components/RoomCard.js";
 import DateSelector from "../components/DateSelector.js";
 import Modal from "../components/Modal.js";
+import CardLounge from "../components/CardLounge.js";
 import CarouselCard from "../components/CarouselCard.js";
 
 export default function renderHomePage() {
@@ -30,6 +31,7 @@ export default function renderHomePage() {
     const dateSelect = DateSelector();
     divRoot.appendChild(dateSelect);
 
+    const dateToday = new Date().toISOString().split("T")[0];
 
     const [dateInput, dateOutput] = dateSelect.querySelectorAll('input[type="date"]');
     const guestsAmount = dateSelect.querySelector('select');
@@ -42,6 +44,13 @@ export default function renderHomePage() {
     card.className = "cardContainer";
     card.id = "card-result";
 
+    const cardGroup = document.createElement('div');
+    cardGroup.className = 'cardContainer';
+
+    const tituloGroup = document.createElement('h2');
+    tituloGroup.textContent = "Conheça nosso hotel";
+    tituloGroup.style.textAlign = "center";
+
     const showModal = (message) => {
         const modalBody = document.getElementById('modal-content');
         modalBody.textContent = message;
@@ -51,6 +60,32 @@ export default function renderHomePage() {
         bootstrapModal.show();
     };
 
+    const loungeItems = [
+            {path: "restaurante.jpg", title:
+                "Restaurante", text: "Nosso restaurante"
+                 + " têm as melhores especiárias de peixes!"},
+
+            {path: "spa.jpg", title: "SPA",
+                 text: "Nosso SPA é ideal para"
+                 + " momentos de relaxamento felino!"},
+
+            {path: "bar.jpg", title: "Bar",
+                 text: "Nosso bar oferece"
+                 + " drinks de peixe sem chumbinho, confia!"}
+    ];
+ 
+
+    for (let i = 0; i < loungeItems.length; i++) {
+         const cardLounge = CardLounge(loungeItems[i], i);
+         cardGroup.appendChild(cardLounge);
+    }
+
+    function getMinDateCheckout(dateCheckin) {
+        const minDaily = new Date(dateCheckin);
+        minDaily.setDate(minDaily.getDate() + 1);
+        return minDaily.toISOString().split('T')[0];
+    }
+
 
     btnSearchRoom.addEventListener("click", async(e) => {
         e.preventDefault();
@@ -59,7 +94,7 @@ export default function renderHomePage() {
         const fim = (dateOutput?.value || "").trim();
         const capacidade = parseInt(guestsAmount?.value || "0", 10);
 
-        //Validação do preenchimento de infos
+
         if (!inicio || !fim || Number.isNaN(capacidade) || (capacidade) <= 0) {
              showModal("Preencha todos os campos!");
             return;

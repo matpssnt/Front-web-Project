@@ -22,19 +22,37 @@ class OrderModel {
         return false;
     }
 
-    public static function update($conn, $data) {
-
+    public static function update($conn, $data, $id) {
+        $sql = "UPDATE pedidos SET usuario_id=?, cliente_id=?, pagamento=? WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iisi",
+            $data["usuario_id"],
+            $data["cliente_id"],
+            $data["pagamento"],
+            $id
+        );
+        return $stmt->execute();
     }
 
-    public static function delete($conn, $data) {
-
+    public static function delete($conn, $id) {
+        $sql = "DELETE FROM pedidos WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
     }
 
-    public static function getAll($conn, $data) {
-
+    public static function getAll($conn) {
+        $sql = "SELECT * FROM pedidos";
+        $result = $conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public static function getById($conn, $data) {
+    public static function getById($conn, $id) {
+        $sql = "SELECT * FROM pedidos WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
         
     }
 
@@ -62,7 +80,7 @@ class OrderModel {
                 $fim = $quarto["fim"];
 
                 if ( !RoomModel::blockById($conn, $id) ) {
-                    $reservas[] = "Quarto ($id) indisponível!"
+                    $reservas[] = "Quarto ($id) indisponível!";
                     continue;
                 }
 
@@ -92,6 +110,9 @@ class OrderModel {
                     "reservas" => $reservas,
                     "message" => "Reservas criadas com sucesso"
                 ];
+            }
+            else {
+                throw new RuntimeException("Pedido nao realizado, nenhum quarto reservado");
             }
 
         }
