@@ -31,8 +31,33 @@ class ReservaModel {
         return $stat->execute();
     }
 
-    public static function verifyRoom() {
+    public static function verifyRoom($conn, $fkQuarto, $inicio, $fim) {
+        $sql =
+        "
+        SELECT
+            id
+        FROM
+            reservas
+        WHERE
+            fk_quartos = ? AND
+            (
+                inicio < ? AND fim > ?
+            )
+        LIMIT 1;
+            ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "iss",
+            $fkQuarto,
+            $fim,
+            $inicio
+        );  
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $isReserved = $result->num_rows > 0;
+        $stmt->close();
 
+        return $isReserved;
     }
 }
 

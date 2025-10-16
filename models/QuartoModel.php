@@ -96,6 +96,10 @@ class RoomModel {
         
         return $row;
     }
+
+    public static function trocarNome($conn, $id) {
+
+    }
 }
 
 ?>

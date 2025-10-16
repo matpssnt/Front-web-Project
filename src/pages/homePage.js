@@ -33,7 +33,11 @@ export default function renderHomePage() {
 
     const dateToday = new Date().toISOString().split("T")[0];
 
-    const [dateInput, dateOutput] = dateSelect.querySelectorAll('input[type="date"]');
+    const [dateCheckIn, dateCheckOut] = dateSelect.querySelectorAll('input[type="date"]');
+    dateCheckIn.min = dateToday;
+    dateCheckOut.min = dateToday;
+
+
     const guestsAmount = dateSelect.querySelector('select');
     const btnSearchRoom = dateSelect.querySelector('button');
     
@@ -82,9 +86,25 @@ export default function renderHomePage() {
 
     function getMinDateCheckout(dateCheckin) {
         const minDaily = new Date(dateCheckin);
+        
         minDaily.setDate(minDaily.getDate() + 1);
         return minDaily.toISOString().split('T')[0];
     }
+
+    dateCheckIn.addEventListener("change", async (e) => {
+        if (dateCheckIn.value) {
+            const minDateCheckout = getMinDateCheckout(dateCheckIn.value);
+            dateCheckOut.min = minDateCheckout;
+        
+        //Se já houver uma data de check-out selecionada e for inválida
+            if (dateCheckOut.value && dateCheckOut.value <= dateCheckIn.value) {
+                dateCheckOut.value = "";
+                alert("A data de check-out deve ser posterior ao check-in!");
+                /* Estou utilizando alerta porque EU, PROFESSORA, não tenho
+                um modal, vocês deveriam já ter e chamá-lo no lugar do alert() */ 
+            }
+        }
+    });
 
 
     btnSearchRoom.addEventListener("click", async(e) => {
@@ -133,4 +153,6 @@ export default function renderHomePage() {
     });
 
     divRoot.appendChild(card);
+    divRoot.appendChild(tituloGroup);
+    divRoot.appendChild(cardGroup);
 }
