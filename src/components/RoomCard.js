@@ -12,8 +12,8 @@ export default function RoomCard(itemCard, index = 0) {
 const title = nome;
 
 const camas = [
-    (qnt_cama_casal != null ? `${qtd_cama_casal} cama(s) de casal` : null),
-    (qnt_cama_solteiro != null ? `${qtd_cama_solteiro} cama(s) de solteiro` : null),
+    (qnt_cama_casal != null ? `${qnt_cama_casal} cama(s) de casal` : null),
+    (qnt_cama_solteiro != null ? `${qnt_cama_solteiro} cama(s) de solteiro` : null),
 ].filter(Boolean).join(' - ');
 
     const card = document.createElement('div');

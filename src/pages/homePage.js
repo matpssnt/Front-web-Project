@@ -110,8 +110,8 @@ export default function renderHomePage() {
     btnSearchRoom.addEventListener("click", async(e) => {
         e.preventDefault();
 
-        const inicio = (dateInput?.value || "").trim();
-        const fim = (dateOutput?.value || "").trim();
+        const inicio = (dateCheckIn?.value || "").trim();
+        const fim = (dateCheckOut?.value || "").trim();
         const capacidade = parseInt(guestsAmount?.value || "0", 10);
 
 

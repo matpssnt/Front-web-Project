@@ -31,20 +31,47 @@ class ReservaModel {
         return $stat->execute();
     }
 
+    public static function isQuartoDisponivel($conn, $quarto_id, $inicio, $fim) {
+        $sql = "SELECT COUNT(*) as conflitos
+        FROM reservas
+        WHERE quarto_id = ?
+        AND (
+            (inicio <= ? AND fim > ?) OR
+            (inicio < ? AND fim >= ?) OR
+            (inicio >= ? AND fim <= ?)
+        )";
+       
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("issssss",
+            $quarto_id,
+            $fim, $inicio,
+            $inicio, $fim,
+            $inicio, $fim
+        );
+       
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['conflitos'] == 0;
+    }
+
+    public static function isConflito($conn, $quarto_id, $inicio, $fim) {
+        $sql = "SELECT * FROM reservas WHERE quarto_id = ? AND inicio < ? AND fim > ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iss", $quarto_id, $fim, $inicio);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
+
     public static function verifyRoom($conn, $fkQuarto, $inicio, $fim) {
         $sql =
-        "
-        SELECT
-            id
-        FROM
-            reservas
-        WHERE
-            fk_quartos = ? AND
-            (
-                inicio < ? AND fim > ?
-            )
-        LIMIT 1;
-            ";
+        "SELECT id
+        FROM reservas
+        WHERE quarto_id = ? AND
+            (inicio < ? AND fim > ?)
+        LIMIT 1;";
+
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(
             "iss",
