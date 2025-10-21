@@ -42,6 +42,21 @@ input:focus {
     border-color: rgb(90, 55, 3);
 }
 
+.btn-secondary {
+    background-color: rgb(161, 10, 10);
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: rgb(145, 6, 6);
+    border: none;
+}
+
+.btn-secondary:active {
+    background-color: rgb(90, 3, 3) !important;
+    border-color: rgb(90, 3, 3);
+}
+
 #root {                    
     flex-direction: column;
     gap: 10vh;

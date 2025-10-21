@@ -2,13 +2,15 @@ import renderLoginPage from "./pages/login.js";
 import renderRegisterPage from "./pages/register.js";
 import renderHomePage from "./pages/homePage.js";
 import renderCartPage from "./pages/cart.js";
+import renderRegRoomPage from "./pages/registerRoom.js";
 
 // Configuração de rotas
 const routes = {
     "/login": renderLoginPage,
     "/register": renderRegisterPage,
     "/home": renderHomePage,
-    "/cart" : renderCartPage
+    "/cart" : renderCartPage,
+    "/room": renderRegRoomPage
     //Novas páginas virão aqui, conforme forem sendo desenvolvidas.
 };
 
