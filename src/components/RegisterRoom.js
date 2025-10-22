@@ -22,9 +22,8 @@ export default function RegisterRoom() {
         const label = document.createElement('label');
         label.textContent = labelText;
         label.style.fontFamily = '"Lato", sans-serif';
-        label.style.fontWeight = '400';
+        label.style.fontWeight = 'bold';
         label.style.marginBottom = '3px';
-        //label.style.marginTop = '15px';
         formu.appendChild(label);
 
         const input = document.createElement('input');
@@ -55,7 +54,7 @@ export default function RegisterRoom() {
     const labelDisponivel = document.createElement('label');
     labelDisponivel.textContent = 'Disponibilidade:';
     labelDisponivel.style.fontFamily = '"Lato", sans-serif';
-    labelDisponivel.style.fontWeight = '400';
+    labelDisponivel.style.fontWeight = 'bold';
     labelDisponivel.style.marginBottom = '5px';
     labelDisponivel.style.marginTop = '15px';
     formu.appendChild(labelDisponivel);
@@ -84,7 +83,7 @@ export default function RegisterRoom() {
     const labelImage = document.createElement('label');
     labelImage.textContent = 'Imagem do Quarto:';
     labelImage.style.fontFamily = '"Lato", sans-serif';
-    labelImage.style.fontWeight = '400';
+    labelImage.style.fontWeight = 'bold';
     labelImage.style.marginBottom = '5px';
     labelImage.style.marginTop = '15px';
     formu.appendChild(labelImage);
@@ -92,7 +91,7 @@ export default function RegisterRoom() {
     const inputImageContainer = document.createElement('div');
     inputImageContainer.innerHTML = `
     <div class="mb-3">
-      <label for="formFileMultiple" class="form-label" style="font-family: 'Lato', sans-serif; font-weight: 400;">Escolher imagens (opcional)</label>
+      <label for="formFileMultiple" class="form-label" style="font-family: 'Lato', sans-serif; font-weight: 400; font-style: italic;">Escolher imagens (opcional)</label>
       <input class="form-control input" type="file" id="formFileMultiple" name="imagem" accept="image/*" multiple style="padding: 8px; font-family: 'Lato', sans-serif;">
     </div>
     `;

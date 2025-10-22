@@ -29,6 +29,10 @@ class RoomModel {
             $data["preco"],
             $data['disponivel']
         );
+
+        if ($stat->execute()) {
+            return $conn->insert_id;
+        }
         return $stat->execute();
     }
 

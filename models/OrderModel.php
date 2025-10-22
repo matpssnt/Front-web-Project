@@ -34,7 +34,7 @@ class OrderModel{
     }
 
     public static function update($conn, $data, $id){
-        $sql = "UPDATE pedidos SET usuario_id=?, cliente_id=?, pagamento=? WHERE id=?";
+        $sql = "UPDATE pedidos SET usuario_id = ?, cliente_id = ?, pagamento = ? WHERE id=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iisi",
             $data["usuario_id"],
