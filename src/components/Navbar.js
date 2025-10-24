@@ -16,7 +16,7 @@ export default function Navbar() {
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="home">Home</a>
+                    <a class="nav-link" aria-current="page" href="home">Home</a>
                 </li>
 
                 <li class="nav-item">
@@ -44,10 +44,9 @@ export default function Navbar() {
                 </li>
             </ul>
 
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button class="btn btn-outline-light" type="submit">Search</button>
-            </form>
+            <a class="nav-link" href="cart" style="position: relative; right: 20px;">
+                <img src="publics/assets/img/basket2-fill.svg" style="width: 35px; height: 35px; filter: invert(1);">
+            </a>
             
         </div>
     </div>

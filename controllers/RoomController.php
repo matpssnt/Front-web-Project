@@ -69,5 +69,22 @@ class RoomController {
             return jsonResponse(['message'=>"Erro ao buscar quartos disponiveis"], 404); 
         }
     }
+
+    public static function get_available($conn, $data){
+        ValidateController::validate_data($data, ["inicio", "fim", "qtd"]);
+
+        $data["inicio"] = ValidateController::fix_dateHour($data["inicio"], 14);
+        $data["fim"] = ValidateController::fix_dateHour($data["fim"], 12);
+        
+        $result = RoomModel::buscarDisponivel( $conn, $data);
+        if($result){
+            foreach ($result as $quarto) {
+                $quarto['fotos'] = PhotosModel::getByRoomId($conn, $quarto['id']);
+            }
+            return jsonResponse(['Quartos'=> $result]);
+        }else{
+            return jsonResponse(['message'=> 'não tem quartos disponiveis'], 400);
+        }
+    }
 }
 ?>

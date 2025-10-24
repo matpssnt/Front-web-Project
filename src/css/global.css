@@ -62,6 +62,17 @@ input:focus {
     gap: 10vh;
     margin-bottom: 10vh;
 }  
+
+
+
+/* ESTILOS PRO NAVBAR */
+.navbar-nav .nav-link:hover {
+    color: rgb(255, 255, 255) !important;
+    transition: color 0.2s ease;
+}
+
+
+
 /* NOVOS ESTILOS PARA O HERO */
 
 .hero-frame {
@@ -87,12 +98,12 @@ input:focus {
 /* NOVOS ESTILOS PARA O CARD */
 
 .cardContainer {
-    margin: 15px;
     display: flex;
+    width: 100%;
     justify-content: center;
-    flex-direction: wrap;
     align-items: center;
-    gap: 35px;
+    gap: 25px;
+    margin-top: 15px;
 }
 
 /* Estilo para o carrossel dentro do card */
@@ -183,24 +194,7 @@ input:focus {
     box-shadow: none;
 }
 
-/* NOVOS ESTILOS PARA O CART 
-
-.border-right {
-  border-right: 1px solid #000;
-}
-
-.table-color{
-    background-color: #4b0505;
-    color: #ccc;
-}
-
-.grid {
-    width: 70%;
-}
-
-.total {
-    font-weight: 700;
-}*/
+/* NOVOS ESTILOS PARA O CART */
 
 
 /* MODAL */

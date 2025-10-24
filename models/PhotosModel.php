@@ -3,13 +3,13 @@
 class PhotosModel {
 
     public static function getAll($conn) {
-        $sql = "SELECT * FROM pedidos";
+        $sql = "SELECT * FROM imagens";
         $result = $conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public static function getById($conn, $id) {
-        $sql = "SELECT * FROM pedidos WHERE id= ?";
+        $sql = "SELECT * FROM imagens WHERE id= ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -35,14 +35,14 @@ class PhotosModel {
     }
 
     public static function create($conn, $data) {
-        $sql = "INSERT INTO pedidos (usuario_id, cliente_id, pagamento) 
+        $sql = "INSERT INTO imagens (nome, tipo, caminho) 
         VALUES (?, ?, ?);";
         
         $stat = $conn->prepare($sql);
-        $stat->bind_param("iis", 
-            $data["usuario_id"],
-            $data["cliente_id"],
-            $data["pagamento"]
+        $stat->bind_param("sss", 
+            $data["name"],
+            $data["type"],
+            $data["path"]
         );
         if ($stat->execute()) {
             return $conn->insert_id;
@@ -75,7 +75,7 @@ class PhotosModel {
     }
 
     public static function delete($conn, $id) {
-        $sql = "DELETE FROM pedidos WHERE id= ?";
+        $sql = "DELETE FROM imagens WHERE id= ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         return $stmt->execute();

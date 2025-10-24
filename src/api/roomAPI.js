@@ -1,3 +1,26 @@
+export async function cadRoom(contentForm) {
+    const formData = new FormData(contentForm);
+    const typeAccept = ['image/jpeg', 'image/png'];
+    const inputFotos = contentForm.querySelector('#formFileMultiple');
+    const imgs = inputFotos.files;
+    for (let i = 0; i < imgs.length; i++) {
+        if(!typeAccept.includes(imgs[i].type)) {
+            throw new Error(`Arquivo "${imgs[i].name}" não é suportado.
+            Selecione um arquivo JPG ou PNG`);
+        }
+    }
+    const url = `api/rooms`;
+    const response = await fetch(url, {
+        method: "POST",
+        body: formData
+    });
+    if(!response.ok) {
+        throw new Error(`Erro ao enviar requisição: ${response.status}`);
+    }
+    const result = await response.json();
+    return result;
+}   
+
 export async function listAvailableRoomsRequest({ inicio, fim, capacidade }) {
     const params = new URLSearchParams();
 
