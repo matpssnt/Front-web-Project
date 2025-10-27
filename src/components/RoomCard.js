@@ -1,25 +1,27 @@
-//function calculoDiaria(checkIn, checkOut) {
-//    const checkIn = "2026-01-01";
-//    const checkOut = "2026-01-08";
-//
-//    const [yin, min, din] = String(checkIn).split('-').map(Number);
-//    const [yout, mout, dout] = String(checkOut).split('-').map(Number);
-//    
-//    const tzin = Date.UTC(yin, min - 1, din);
-//    const tzout = Date.UTC(yout, mout - 1, dout);
-//
-//    return Math.floor((tzout - tzin) / (1000 * 60 * 60 * 24));
-//}
+import { addItemToHotel_Cart } from "../store/cartStore.js";
+
+function calculoDiaria(checkIn, checkOut) {
+    /*const checkIn = "2026-01-01";
+    const checkOut = "2026-01-08";*/
+
+    const [yin, min, din] = String(checkIn).split('-').map(Number);
+    const [yout, mout, dout] = String(checkOut).split('-').map(Number);
+    
+    const tzin = Date.UTC(yin, min - 1, din);
+    const tzout = Date.UTC(yout, mout - 1, dout);
+
+    return Math.floor((tzout - tzin) / (1000 * 60 * 60 * 24));
+}
 
 export default function RoomCard(itemCard, index = 0) {
 
     const {
-    nome,
-    numero,
-    qnt_cama_casal,
-    qnt_cama_solteiro,
-    preco,
-    disponivel
+        id,
+        nome,
+        numero,
+        qnt_cama_casal,
+        qnt_cama_solteiro,
+        preco
 } = itemCard || {};
 
 const title = nome;
@@ -75,10 +77,54 @@ const camas = [
         </ul>
 
         <p class="card-text">Desfrute do conforto da nossa Suíte Luxo com todas as comodidades.</p>
-        <a href="#" class="btn btn-primary">Reservar</a>
+        <a href="#" class="btn btn-primary btn-reserve">Reservar</a>
     </div>
 
 </div>`;
 
-return card;
+    card.querySelector(".btn-reserve").addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Ler informações setadas nos imputs dateCheckIn, dateCheckOut e guestAmount (IDs)
+        const idDateCheckin = document.getElementById('id-dateCheckIn');
+        const idDateCheckout = document.getElementById('id-dateCheckOut');
+        const idGuestAmount = document.getElementById('id-guestAmount');
+
+        const inicio = (idDateCheckin?.value || "");
+        const fim = (idDateCheckout?.value || "");
+        const capacidade = parseInt(idGuestAmount?.value || "0", 10);
+
+        /*Validação do preenchimento de infos => contexto: Usuário pesquisou quartos disponiveis, mas na hora de
+        simplesmente reservar, usuário voltou ao campo do check-in ou check-out e limpou a informação de lá, mas
+        não setou uma nova pesquisa p/ buscar novamnete quartos*/
+        if (!inicio || !fim || Number.isNaN(capacidade) || capacidade <= 0) {
+            console.log("Preencha todos os campos!");
+            return;
+        }
+
+        const daily = calculoDiaria(inicio, fim);
+        
+        //Cálculo do subtotal do quarto (preco * nº de diárias)
+        const subtotal = parseFloat(preco) * daily;
+        
+        const newItemReserve = {
+            id,
+            nome,
+            checkIn: inicio,
+            checkOut: fim,
+            guests: capacidade,
+            daily,
+            subtotal
+        }
+
+        addItemToHotel_Cart(newItemReserve);
+        //Alerta pode ser trocado por um modal com melhor aparência
+        alert(`Reserva do quarto adicionada: ${nome} 
+            - Preço/diária: ${preco} 
+            - Nº de diárias ${daily} 
+            - Subtotal: R$ ${subtotal}`);
+
+    });
+
+    return card;
 }

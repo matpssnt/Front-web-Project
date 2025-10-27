@@ -39,6 +39,11 @@ export default function renderHomePage() {
 
 
     const guestsAmount = dateSelect.querySelector('select');
+
+    dateCheckIn.id = 'id-dateCheckIn';
+    dateCheckOut.id = 'id-dateCheckOut';
+    guestsAmount.id = 'id-guestAmount';
+
     const btnSearchRoom = dateSelect.querySelector('button');
     
     const modal = Modal();

@@ -7,18 +7,18 @@ export function setCart(cart) {
 export function getCart() {
     try {
         const raw = localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : {status: "draft", item: []};
+        return raw ? JSON.parse(raw) : {status: "draft", items: []};
     }
     catch (error) {
-        return {status: "draft", item: []};
+        return {status: "draft", items: []};
     }
 }
 
 export function addItemToHotel_Cart(item) {
     const cart = getCart();
     cart.items.push(item);
-    setCart(hotel_cart);
-    return hotel_cart;
+    setCart(cart);
+    return cart;
 }
 
 export function removeItemFromHotel_Cart(i) {

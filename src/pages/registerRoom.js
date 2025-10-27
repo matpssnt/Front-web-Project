@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar.js";
 import Form from "../components/Form.js";
 import { cadRoom } from "../api/roomAPI.js"; // Importe a API da sua professora
 
-export default function RegisterRoom() {
+export default function renderRegRoomPage() {
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
 
@@ -55,7 +55,7 @@ export default function RegisterRoom() {
     createFormField('Quantidade de Camas de Solteiro:', 'number', 'Ex: 1, 2, etc.');
     createFormField('Preço por Diária (R$):', 'number', 'Ex: R$ 50.00');
 
-    // Campo de disponibilidade (select)
+    
     const labelDisponivel = document.createElement('p');
     labelDisponivel.textContent = 'Disponibilidade:';
     labelDisponivel.style.fontFamily = '"Lato", sans-serif';
@@ -67,7 +67,7 @@ export default function RegisterRoom() {
     selectDisponivel.className = 'd-flex flex-row gap-3 align-items-center mb-3';
     formu.appendChild(selectDisponivel);
 
-    // Radio Sim
+    // Radio (sim)
     const radioSimContainer = document.createElement('div');
     radioSimContainer.className = 'd-flex align-items-center gap-2';
     
@@ -87,7 +87,7 @@ export default function RegisterRoom() {
     radioSimContainer.appendChild(inputDispTrue);
     radioSimContainer.appendChild(labelTrue);
 
-    // Radio Não
+    // Radio (não)
     const radioNaoContainer = document.createElement('div');
     radioNaoContainer.className = 'd-flex align-items-center gap-2';
     
@@ -110,7 +110,7 @@ export default function RegisterRoom() {
     selectDisponivel.appendChild(radioSimContainer);
     selectDisponivel.appendChild(radioNaoContainer);
 
-    // Estilo para os radios
+    
     const radioStyle = document.createElement('style');
     radioStyle.textContent = `
         input[type="radio"] {
@@ -120,7 +120,7 @@ export default function RegisterRoom() {
     `;
     document.head.appendChild(radioStyle);
 
-    // Campo de imagem (mantenha igual)
+    
     const labelImage = document.createElement('label');
     labelImage.textContent = 'Imagem do Quarto:';
     labelImage.style.fontFamily = '"Lato", sans-serif';
@@ -161,7 +161,7 @@ export default function RegisterRoom() {
     previewLabel.style.marginTop = '10px';
     previewImages.appendChild(previewLabel);
 
-    // Preview de imagens (mantenha igual)
+
     const formFileInput = inputImageContainer.querySelector('#formFileMultiple');
     if (formFileInput) {
         formFileInput.addEventListener('change', (e) => {
@@ -220,37 +220,23 @@ export default function RegisterRoom() {
 
     container.appendChild(formu);
 
-    // ✅ EVENT LISTENER CORRIGIDO - Conectando com a API da professora
-    formu.addEventListener('submit', async (e) => {
+    container.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
         try {
-            // Mostrar loading
             submitButton.disabled = true;
             submitButton.textContent = 'Cadastrando...';
-            
-            // ✅ CHAMA A API DA SUA PROFESSORA
-            const result = await cadRoom(formu);
-            
-            alert('Quarto cadastrado com sucesso!');
-            formu.reset();
-            
-            // Limpar preview
-            const previewGridImg = document.getElementById('preview-images-grid');
-            const previewLabelImg = document.getElementById('preview-images-label');
-            if (previewGridImg) previewGridImg.innerHTML = '';
-            if (previewLabelImg) {
-                previewLabelImg.style.display = 'block';
-                previewLabelImg.textContent = 'Nenhuma imagem selecionada!';
-            }
-            
-        } catch (error) {
-            alert(`Erro ao cadastrar quarto: ${error.message}`);
-        } finally {
-            // Restaurar botão
+
+            const response = await cadRoom(formu);
+            console.log("Resposta do servidor: ", response);
+        }
+        catch (error) {
+            console.log("Erro ao enviar requisição: " + error.message);
+        }
+        finally {
             submitButton.disabled = false;
             submitButton.textContent = 'Registrar';
         }
+    
     });
 
     cancelButton.addEventListener('click', () => {
