@@ -1,6 +1,6 @@
 import Footer from "../components/Footer.js"
 import Navbar from "../components/Navbar.js";
-
+import { getCart, getTotalItems, clearHotel_Cart } from "../store/cartStore.js";
 
 export default function renderCartPage(){
     
@@ -12,6 +12,9 @@ export default function renderCartPage(){
 
     const divRoot = document.getElementById('root');
     divRoot.innerHTML = '';
+
+    const itens = getCart();
+    const { total, qnt_items } = getTotalItems();
 
     const cart = document.createElement('div');
     cart.className = "tablestyle";
@@ -52,9 +55,9 @@ export default function renderCartPage(){
     `;
     divRoot.appendChild(cart);
 
-    const foot = document.getElementById('footer');
-    foot.innerHTML = '';
+    const pezin = document.getElementById('footer');
+    pezin.innerHTML = '';
         
     const footer = Footer();
-    foot.appendChild(footer);
+    pezin.appendChild(footer);
 }

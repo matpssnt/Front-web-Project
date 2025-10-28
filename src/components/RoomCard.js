@@ -106,7 +106,6 @@ const camas = [
         
         //Cálculo do subtotal do quarto (preco * nº de diárias)
         const subtotal = parseFloat(preco) * daily;
-        
         const newItemReserve = {
             id,
             nome,

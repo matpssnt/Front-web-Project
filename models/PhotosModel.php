@@ -81,5 +81,4 @@ class PhotosModel {
         return $stmt->execute();
     }
 }
-
 ?>

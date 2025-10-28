@@ -57,7 +57,7 @@ input:focus {
     border-color: rgb(90, 3, 3);
 }
 
-#root {                    
+#root {             
     flex-direction: column;
     gap: 10vh;
     margin-bottom: 10vh;
