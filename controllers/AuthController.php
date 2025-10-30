@@ -1,5 +1,6 @@
 <?php
     require_once "PasswordController.php";
+    require_once "ValidateController.php";
 
     require_once __DIR__ . "/../models/UserModel.php";
     require_once __DIR__ . "/../models/ClienteModel.php";
@@ -34,6 +35,8 @@
         }
 
         public static function loginClient($conn, $data) {
+            ValidateController::validate_data($data, ["email", "password"]);
+
             $data['email'] = trim($data['email']);
             $data['password'] = trim($data['password']);
 
@@ -43,12 +46,11 @@
                     "message" => "Preencha todos os campos!",
                 ], 401);
             }
-
+            
             $cliente = ClienteModel::clientValidation($conn, $data['email'] , $data['password']);
             if ($cliente) {
-                
                 $token = createToken($cliente);
-                return jsonResponse(["token" => $token ]);
+                return jsonResponse([ "token" => $token ]);
             }
 
             else {
