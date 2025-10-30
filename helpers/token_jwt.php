@@ -1,9 +1,10 @@
 <?php
 
+require_once "response.php";
 require_once __DIR__ . "/jwt/jwt_include.php";
 
 use Firebase\JWT\JWT;
-use Firebase\jWT\Key;
+use Firebase\JWT\Key;
 
 function createToken($user) {
     $payload = [
@@ -20,14 +21,16 @@ function validateToken($token) {
     try {
         $key = new Key(SECRET_KEY, 'HS256');
         $decode = JWT::decode($token, $key);
-        return $decode->sub;
+
+        $result = json_decode( json_encode($decode->sub) , true);
+        return $result;
     }
     catch (Exception $error) {
-        return 'FALSO';
+        return false;
     }
 }
 
-function  validateTokenAPI() {
+function  validateTokenAPI($roles) {
     $headers = getallheaders();
 
     if ( !isset($headers['Authorization']) ) {
@@ -35,11 +38,20 @@ function  validateTokenAPI() {
         exit;
     }
 
-    $token = str_replace("Bearer", "", $headers['Authorization']);
-        if ( !validateToken($token) ) {
+    $token = str_replace("Bearer ",  "", $headers['Authorization']);
+    $user = validateToken($token);
+    
+    
+    if (!$user)  {
         jsonResponse(['message'=>'Token inválido'], 401);
         exit;
     }
+
+    if ($user['cargo'] != $roles) {
+        jsonResponse(['message'=> 'Usuário não autorizado!'], 401);
+        exit;
+    }
+    return $user;
 }
 
 

@@ -55,7 +55,7 @@ class ClienteModel {
     }
 
     public static function clientValidation($conn, $email, $password) {
-        $sql = "SELECT clientes.id, clientes.nome, clientes.email, clientes.senha 
+        $sql = "SELECT clientes.id, clientes.nome, clientes.email, clientes.senha, cargos.nome AS cargo
         FROM clientes 
         JOIN cargos ON cargos.id = clientes.cargo_id
         WHERE clientes.email = ?";

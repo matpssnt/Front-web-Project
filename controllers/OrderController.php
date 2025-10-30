@@ -5,23 +5,44 @@ require_once __DIR__ ."/../models/OrderModel.php";
 class OrderController {
 
     public static function create($conn, $data){
-        return;
+         ValidateController::validate_data($data, ["usuario_id", "cliente_id",  "data",  "pagamento"]);
+
+        $result = OrderModel::create($conn, $data);
+        
+        if ($result) {
+            return jsonResponse(['message'=>'Pedido adicionado com sucesso"']);
+        }
+        else {
+            return jsonResponse(['message'=>'Erro ao registrar o quarto!']);
+        }
     }
 
     public static function getById($conn, $id){
-        return;
+        $result = OrderModel::getById($conn, $id);
+        return jsonResponse($result);
     }
 
     public static function getAll($conn){
-        return;
+        $result = OrderModel::getAll($conn);
+        return jsonResponse($result);
     }
 
-    public static function update($conn, $data){
-        return;
+    public static function update($conn, $data, $id){
+        $result = OrderModel::update($conn, $data, $id);
+        if($result){
+            return jsonResponse(['message'=> 'Pedido atualizado']);
+        } else{
+            return jsonResponse(['message'=> 'DNão foi possivel atualizar o pedido'], 400);
+        }
     }
 
     public static function delete($conn, $id){
-        return;
+        $result = OrderModel::delete($conn, $id);
+         if($result){
+            return jsonResponse(['message'=> 'Pedido excluído']);
+        } else{
+            return jsonResponse(['message'=> ''], 400);
+        }
     }
     public static function createOrder($conn, $data) {
         $data["usuario_id"] = isset($data["usuario_id"]) ? $data["usuario_id"] : null;

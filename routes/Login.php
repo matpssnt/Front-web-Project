@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-    validateTokenAPI();
+    validateTokenAPI("");
     jsonResponse(["message"=>"deu certo"]);
 }
 

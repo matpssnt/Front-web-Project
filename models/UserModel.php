@@ -4,7 +4,7 @@
 class UserModel {
 
     public static function verifUser($conn, $email, $password) {
-        $sql = "SELECT usuarios.id, usuarios.nome, usuarios.senha, usuarios.cargo_id, usuarios.email
+        $sql = "SELECT usuarios.id, usuarios.nome, usuarios.senha, usuarios.cargo_id, usuarios.email, cargos.nome AS cargo
         FROM usuarios 
         JOIN cargos ON cargos.id = usuarios.cargo_id 
         WHERE usuarios.email = ?";

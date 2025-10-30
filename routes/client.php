@@ -33,6 +33,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === "DELETE") {
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "PUT") {
+    validateTokenAPI("");
     $data = json_decode(file_get_contents('php://input'), true);
     $id = $data["id"];
 

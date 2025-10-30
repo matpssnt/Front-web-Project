@@ -15,6 +15,7 @@ if ( $_SERVER['REQUEST_METHOD'] === "GET") {
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
+    validateTokenAPI('ggg');
     $data = json_decode(file_get_contents('php://input'), true);
     AdiciController::create($conn, $data);
 }

@@ -8,6 +8,8 @@ require_once "UploadController.php";
 class RoomController {
     
     public static function create($conn, $data) {
+        ValidateController::validate_data($data, ["nome", "numero", "qnt_cama_casal", "qnt_cama_solteiro", "preco", "disponivel"]);
+
         $result = RoomModel::create($conn, ["nome", "numero", "qnt_cama_casal", "qnt_cama_solteiro", "preco", "disponivel"]);
         
         if ($result) {
