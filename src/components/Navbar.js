@@ -44,7 +44,7 @@ export default function Navbar() {
                 </li>
             </ul>
 
-            <a class="nav-link" href="cart" style="position: relative; right: 20px;">
+            <a class="nav-link" href="cart" style="position: relative;">
                 <img src="publics/assets/img/basket2-fill.svg" style="width: 35px; height: 35px; filter: invert(1);">
             </a>
             

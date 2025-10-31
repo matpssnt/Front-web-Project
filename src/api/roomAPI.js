@@ -1,4 +1,4 @@
-export async function cadRoom(formu) {
+export async function createRoom(formu) {
     const formData = new FormData(formu);
     const typeAccept = ['image/jpeg', 'image/png'];
     const inputFotos = formu.querySelector('#formFileMultiple');

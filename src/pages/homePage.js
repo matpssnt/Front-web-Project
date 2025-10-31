@@ -104,7 +104,7 @@ export default function renderHomePage() {
         //Se já houver uma data de check-out selecionada e for inválida
             if (dateCheckOut.value && dateCheckOut.value <= dateCheckIn.value) {
                 dateCheckOut.value = "";
-                alert("A data de check-out deve ser posterior ao check-in!");
+                showModal("A data de check-out deve ser posterior ao check-in!");
                 /* Estou utilizando alerta porque EU, PROFESSORA, não tenho
                 um modal, vocês deveriam já ter e chamá-lo no lugar do alert() */ 
             }

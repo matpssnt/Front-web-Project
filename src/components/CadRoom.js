@@ -1,4 +1,4 @@
-import { cadRoom } from "../api/roomAPI.js";
+import { createRoom } from "../api/roomAPI.js";
 
 export default function cadRoom() {
     const divRoot = document.getElementById('root');
@@ -11,7 +11,9 @@ export default function cadRoom() {
     container.style.maxWidth = '500px';
     container.style.margin = '40px auto';
 
-
+    const formu = document.createElement('form');
+    formu.className = "d-flex flex-column";
+    formu.enctype = 'multipart/form-data';
 
     const titulo = document.createElement('h2');
     titulo.className = 'titulo';
@@ -216,7 +218,7 @@ export default function cadRoom() {
             submitButton.disabled = true;
             submitButton.textContent = 'Cadastrando...';
 
-            const response = await cadRoom(formu);
+            const response = await createRoom(formu);
             console.log("Resposta do servidor: ", response);
         }
         catch (error) {
