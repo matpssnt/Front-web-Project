@@ -13,15 +13,20 @@ export default function renderRegRoomPage() {
 
     const divRoot = document.getElementById('root');
     divRoot.innerHTML = '';
+    divRoot.style.minHeight = '100vh';
 
     const RoomForm = cadRoom();
 
     const containerRoom = document.createElement('div');
-    containerRoom.className = 'cards';
+    // containerRoom.className = 'cards';
 
     containerRoom.appendChild(RoomForm);
     divRoot.appendChild(containerRoom);
 
-    Footer();
+    const footer = document.getElementById('footer');
+    footer.innerHTML = '';
+
+    const pezin = Footer();
+    footer.appendChild(pezin);
 
 }

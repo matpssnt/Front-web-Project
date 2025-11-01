@@ -1,9 +1,6 @@
 import { createRoom } from "../api/roomAPI.js";
 
 export default function cadRoom() {
-    const divRoot = document.getElementById('root');
-    divRoot.innerHTML = '';
-    divRoot.style.height = '100vh';
 
     const container = document.createElement('div');
     container.className = 'card p-4 shadow-lg';
@@ -16,98 +13,94 @@ export default function cadRoom() {
     formu.enctype = 'multipart/form-data';
 
     const titulo = document.createElement('h2');
-    titulo.className = 'titulo';
+    titulo.className = 'titulo text-center mb-4';
     titulo.textContent = 'Registrar Novo Quarto';
     container.appendChild(titulo);
 
-    function createFormField(labelText, inputType, placeholder, required = true) {
+    function createFormField(labelText, inputType, placeholder, name, required = true) {
+        const formGroup = document.createElement('div'); 
+        formGroup.className = 'mb-3';
+
         const label = document.createElement('label');
         label.textContent = labelText;
+        label.className = 'form-label';
         label.style.fontFamily = '"Lato", sans-serif';
         label.style.fontWeight = 'bold';
         label.style.marginBottom = '3px';
-        formu.appendChild(label);
+        formGroup.appendChild(label);
 
         const input = document.createElement('input');
         input.type = inputType;
         input.placeholder = placeholder;
         input.required = required;
-        input.className = 'input';
+        input.name = name;
+        input.className = 'form-control';
         input.style.padding = '5px';
         input.style.fontFamily = '"Lato", sans-serif';
         input.style.fontSize = '16px';
-        formu.appendChild(input);
+        formGroup.appendChild(input);
+
+        formu.appendChild(formGroup);
 
         return input;
     }
 
-    createFormField('Nome do Quarto:', 'text', 'Ex: Suíte Luxo, Quarto Standard, etc.');
-    createFormField('Número do Quarto:', 'number', 'Ex: 101, 202, etc.');
-    createFormField('Quantidade de Camas de Casal:', 'number', 'Ex: 1, 2, etc.');
-    createFormField('Quantidade de Camas de Solteiro:', 'number', 'Ex: 1, 2, etc.');
-    createFormField('Preço por Diária (R$):', 'number', 'Ex: R$ 50.00');
+    createFormField('Nome do Quarto:', 'text', 'Ex: Suíte Luxo, Quarto Standard, etc.', "nome");
+    createFormField('Número do Quarto:', 'number', 'Ex: 101, 202, etc.', "numero");
+    createFormField('Quantidade de Camas de Casal:', 'number', 'Ex: 1, 2, etc.', "qnt_cama_solteiro");
+    createFormField('Quantidade de Camas de Solteiro:', 'number', 'Ex: 1, 2, etc.', "qnt_cama_casal");
+    createFormField('Preço por Diária (R$):', 'number', 'Ex: R$ 50.00', "preco");
 
+
+    const radioGroup = document.createElement('div');
+    radioGroup.className = 'mb-3';
     
     const labelDisponivel = document.createElement('p');
     labelDisponivel.textContent = 'Disponibilidade:';
     labelDisponivel.style.fontFamily = '"Lato", sans-serif';
     labelDisponivel.style.fontWeight = 'bold';
-    labelDisponivel.style.marginBottom = '10px';
-    formu.appendChild(labelDisponivel);
+    labelDisponivel.style.marginBottom = '5px';
+    radioGroup.appendChild(labelDisponivel);
 
     const selectDisponivel = document.createElement('div');
-    selectDisponivel.className = 'd-flex flex-row gap-3 align-items-center mb-3';
-    formu.appendChild(selectDisponivel);
+    selectDisponivel.className = 'd-flex flex-row gap-3 align-items-center';
+    radioGroup.appendChild(selectDisponivel);
 
-    // Radio (sim)
-    const radioSimContainer = document.createElement('div');
-    radioSimContainer.className = 'd-flex align-items-center gap-2';
-    
-    const inputDispTrue = document.createElement('input');
-    inputDispTrue.type = 'radio';
-    inputDispTrue.name = 'disponivel';
-    inputDispTrue.value = 'true';
-    inputDispTrue.id = 'disponivel-sim';
-    inputDispTrue.style.cursor = "pointer";
+    // Função radio button
+    function createRadio(value, labelText, checked = false) {
+        const container = document.createElement('div');
+        container.className = 'form-check';
 
-    const labelTrue = document.createElement('label');
-    labelTrue.textContent = 'Sim';
-    labelTrue.htmlFor = 'disponivel-sim';
-    labelTrue.style.cursor = 'pointer';
-    labelTrue.style.marginBottom = '0';
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'disponivel';
+        input.value = value;
+        input.id = `disponivel-${value}`;
+        input.checked = checked;
+        input.className = 'form-check-input';
+        input.style.cursor = 'pointer';
 
-    radioSimContainer.appendChild(inputDispTrue);
-    radioSimContainer.appendChild(labelTrue);
+        const label = document.createElement('label');
+        label.textContent = labelText;
+        label.htmlFor = `disponivel-${value}`;
+        label.className = 'form-check-label';
 
-    // Radio (não)
-    const radioNaoContainer = document.createElement('div');
-    radioNaoContainer.className = 'd-flex align-items-center gap-2';
-    
-    const inputDispFalse = document.createElement('input');
-    inputDispFalse.type = 'radio';
-    inputDispFalse.name = 'disponivel';
-    inputDispFalse.value = 'false';
-    inputDispFalse.id = 'disponivel-nao';
-    inputDispFalse.style.cursor = "pointer";
+        container.appendChild(input);
+        container.appendChild(label);
+        return container;
+    }
 
-    const labelFalse = document.createElement('label');
-    labelFalse.textContent = 'Não';
-    labelFalse.htmlFor = 'disponivel-nao';
-    labelFalse.style.cursor = 'pointer';
-    labelFalse.style.marginBottom = '0';
+    selectDisponivel.appendChild(createRadio("1", 'Sim', true)); // O 'Sim' é o padrão
+    selectDisponivel.appendChild(createRadio("0", 'Não'));
 
-    radioNaoContainer.appendChild(inputDispFalse);
-    radioNaoContainer.appendChild(labelFalse);
-
-    selectDisponivel.appendChild(radioSimContainer);
-    selectDisponivel.appendChild(radioNaoContainer);
+    formu.appendChild(radioGroup);
 
     
     const radioStyle = document.createElement('style');
     radioStyle.textContent = `
-        input[type="radio"] {
-            accent-color: rgb(161, 101, 10);
-            cursor: pointer;
+        .form-check-input:checked {
+            background-color: rgb(161, 101, 10);
+            border-color: rgb(161, 101, 10);
         }
     `;
     document.head.appendChild(radioStyle);
@@ -190,7 +183,7 @@ export default function cadRoom() {
 
     // Botões
     const divButtons = document.createElement('div');
-    divButtons.className = 'd-flex gap-2 justify-content-center';
+    divButtons.className = 'd-flex gap-2 justify-content-center mt-4';
     divButtons.style.marginTop = '25px';
     formu.appendChild(divButtons);
 
